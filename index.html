@@ -1,945 +1,789 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <!-- Basic -->
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <!-- Mobile Metas -->
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <!-- Site Metas -->
-  <meta name="keywords" content="healthcare, ENT, medical services, CETMED" />
-  <meta name="description"
-    content="CETMED OPAL HEALTHCARE provides top-tier medical services with a focus on ENT care, offering advanced treatments and compassionate care." />
-  <meta name="author" content="CETMED OPAL HEALTHCARE" />
-  <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Sapphire - Quantum Digital Solutions</title>
 
-  <title>CETMED OPAL HEALTHCARE</title>
+  <!-- Font System -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
 
-  <!-- bootstrap core css -->
-  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+  <!-- Library Stack -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
 
-  <!-- fonts style -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Icon System -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-  <!-- owl slider stylesheet -->
-  <link rel="stylesheet" type="text/css"
-    href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
-
-  <!-- font awesome style -->
-  <link href="css/font-awesome.min.css" rel="stylesheet" />
-
-  <!-- Custom styles for this template -->
-  <link href="css/style.css" rel="stylesheet" />
-  <!-- responsive style -->
-  <link href="css/responsive.css" rel="stylesheet" />
-
-  <!-- New custom styles -->
   <style>
+    /* === CSS RESET === */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* === COLOR SYSTEM === */
+    :root {
+      /* Primary Palette */
+      --primary-main: #00d4ff;
+      --primary-light: #66e6ff;
+      --primary-dark: #0096c7;
+
+      /* Accent Palette */
+      --accent-main: #ff007a;
+      --accent-light: #ff66b3;
+      --accent-dark: #cc0061;
+
+      /* Dark Theme */
+      --dark-primary: #0d0d2b;
+      --dark-secondary: #1a1a40;
+      --dark-tertiary: #2a2a5e;
+      --dark-border: rgba(255, 255, 255, 0.15);
+
+      /* Text Colors */
+      --text-primary: #f0f4ff;
+      --text-secondary: #d1d9ff;
+      --text-muted: #a1a7cc;
+
+      /* Gradients */
+      --primary-gradient: linear-gradient(135deg, var(--primary-main), var(--primary-dark));
+      --accent-gradient: linear-gradient(135deg, var(--accent-main), var(--accent-light));
+      --cosmic-gradient: linear-gradient(135deg, #00d4ff 0%, #ff007a 50%, #66e6ff 100%);
+
+      /* Spacing */
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2rem;
+      --space-xl: 3rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+      --space-4xl: 8rem;
+
+      /* Transitions */
+      --transition-fast: 0.2s ease-in-out;
+      --transition-normal: 0.4s ease-in-out;
+      --transition-slow: 0.8s ease-in-out;
+
+      /* Shadows */
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
+      --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.25);
+      --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.3);
+      --shadow-glow: 0 0 16px rgba(0, 212, 255, 0.5);
+
+      /* Glassmorphism */
+      --glass-bg: rgba(255, 255, 255, 0.08);
+      --glass-border: rgba(255, 255, 255, 0.15);
+    }
+
+    /* === BASE STYLES === */
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
-      color: #333;
-    }
-
-    /* About Section */
-    .about_section {
-      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-      padding: 80px 0;
-    }
-
-    .about_section .heading_container h2 {
-      font-size: 2.5rem;
-      font-weight: 600;
-      color: #1a3c6d;
-      margin-bottom: 20px;
-    }
-
-    .about_section .heading_container h2 span {
-      color: #00aaff;
-    }
-
-    .about_section .detail-box p {
-      font-size: 1.1rem;
+      background: var(--dark-primary);
+      color: var(--text-primary);
       line-height: 1.8;
-      color: #555;
-      margin-bottom: 30px;
+      overflow-x: hidden;
+      min-height: 100vh;
     }
 
-    .about_section .detail-box a {
-      background-color: #00aaff;
-      color: #fff;
-      padding: 12px 30px;
-      border-radius: 25px;
-      text-transform: uppercase;
-      font-weight: 500;
-      transition: all 0.3s ease;
+    /* === NAVBAR === */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      background: rgba(13, 13, 43, 0.9);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid var(--dark-border);
+      padding: var(--space-sm) 0;
+      transition: all var(--transition-normal);
     }
 
-    .about_section .detail-box a:hover {
-      background-color: #0088cc;
-      transform: translateY(-2px);
+    .navbar.scrolled {
+      background: rgba(13, 13, 43, 0.95);
+      box-shadow: var(--shadow-md);
     }
 
-    .about_section .img-box img {
-      border-radius: 15px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-      width: 100%;
-      max-width: 500px;
-      transition: transform 0.3s ease;
+    .nav-container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 var(--space-lg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .about_section .img-box img:hover {
-      transform: scale(1.05);
-    }
-
-    /* Services Section */
-    .services-bg-dark {
-      position: relative;
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      padding: 80px 0;
-      overflow: hidden;
-    }
-
-    .services-bg-dark::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.65);
-      z-index: 2;
-    }
-
-    .services-bg-dark>.container-fluid {
-      position: relative;
-      z-index: 3;
-    }
-
-    .services-bg-dark .heading_container h2 {
-      font-size: 2.5rem;
-      font-weight: 600;
-      color: #fff;
-      margin-bottom: 20px;
-    }
-
-    .services-bg-dark .heading_container p {
-      color: #e0e0e0;
-      font-size: 1.1rem;
-      line-height: 1.8;
-      margin-bottom: 40px;
-    }
-
-    .services-bg-dark .box {
-      background: rgba(255, 255, 255, 0.1);
-      border: none;
-      border-radius: 15px;
-      padding: 20px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .services-bg-dark .box:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .services-bg-dark .box h5 {
-      color: #00aaff;
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 15px;
-    }
-
-    .services-bg-dark .box p {
-      color: #e0e0e0;
-      font-size: 1rem;
-      line-height: 1.6;
-    }
-
-    .services-bg-dark .img-box img {
-      max-width: 60px;
-      filter: brightness(0) invert(1);
-    }
-
-    .services-bg-dark .btn-box a {
-      background-color: #00aaff;
-      color: #fff;
-      padding: 12px 30px;
-      border-radius: 25px;
-      text-transform: uppercase;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
-
-    .services-bg-dark .btn-box a:hover {
-      background-color: #0088cc;
-      transform: translateY(-2px);
-    }
-
-    /* Doctor Section */
-    .doctor_section {
-      padding: 80px 0;
-      background-color: #fff;
-    }
-
-    .doctor_section .heading_container h2 {
-      font-size: 2.5rem;
-      font-weight: 600;
-      color: #1a3c6d;
-      margin-bottom: 20px;
-    }
-
-    .doctor_section .heading_container p {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      color: #555;
-      margin-bottom: 40px;
-    }
-
-    .doctor_section .box {
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
-    }
-
-    .doctor_section .box:hover {
-      transform: translateY(-10px);
-    }
-
-    .doctor_section .img-box img {
-      width: 100%;
-      height: 250px;
-      object-fit: cover;
-    }
-
-    .doctor_section .detail-box {
-      padding: 20px;
-      text-align: center;
-    }
-
-    .doctor_section .detail-box h5 {
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: #1a3c6d;
-      margin-bottom: 10px;
-    }
-
-    .doctor_section .detail-box h6 {
-      font-size: 1rem;
-      color: #00aaff;
-    }
-
-    .doctor_section .social_box {
-      margin-bottom: 15px;
-    }
-
-    .doctor_section .social_box a {
-      color: #00aaff;
-      font-size: 1.2rem;
-      margin: 0 10px;
-      transition: color 0.3s ease;
-    }
-
-    .doctor_section .social_box a:hover {
-      color: #0088cc;
-    }
-
-    .doctor_section .btn-box a {
-      background-color: #00aaff;
-      color: #fff;
-      padding: 12px 30px;
-      border-radius: 25px;
-      text-transform: uppercase;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
-
-    .doctor_section .btn-box a:hover {
-      background-color: #0088cc;
-      transform: translateY(-2px);
-    }
-
-    /* Contact Section */
-    .contact_section {
-      padding: 80px 0;
-      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    }
-
-    .contact_section .heading_container h2 {
-      font-size: 2.5rem;
-      font-weight: 600;
-      color: #1a3c6d;
-      margin-bottom: 20px;
-    }
-
-    .contact_section .form_container input,
-    .contact_section .form_container textarea {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .contact_section .form_container textarea {
-      resize: vertical;
-      min-height: 150px;
-    }
-
-    .contact_section .form_container button {
-      background-color: #00aaff;
-      color: #fff;
-      padding: 12px 30px;
-      border: none;
-      border-radius: 25px;
-      text-transform: uppercase;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
-
-    .contact_section .form_container button:hover {
-      background-color: #0088cc;
-      transform: translateY(-2px);
-    }
-
-    .contact_section .map_container {
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    }
-
-    .contact_section .map_container #googleMap {
-      height: 400px;
-    }
-
-    /* Client Section */
-    .client_section {
-      padding: 80px 0;
-      background-color: #fff;
-    }
-
-    .client_section .heading_container h2 {
-      font-size: 2.5rem;
-      font-weight: 600;
-      color: #1a3c6d;
-      margin-bottom: 20px;
-    }
-
-    .client_section .box {
-      background: #f8f9fa;
-      border-radius: 15px;
-      padding: 30px;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease;
-    }
-
-    .client_section .box:hover {
-      transform: translateY(-10px);
-    }
-
-    .client_section .img-box img {
-      border-radius: 50%;
-      width: 80px;
-      height: 80px;
-      object-fit: cover;
-      margin-right: 20px;
-    }
-
-    .client_section .detail-box h6 {
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: #1a3c6d;
-      margin-bottom: 10px;
-    }
-
-    .client_section .detail-box p {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: #555;
-    }
-
-    .client_section .detail-box i {
-      color: #00aaff;
-      font-size: 2rem;
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      opacity: 0.2;
-    }
-
-    .client_section .carousel-control-prev,
-    .client_section .carousel-control-next {
-      width: 50px;
-      height: 50px;
-      background-color: #00aaff;
-      border-radius: 50%;
-      top: 50%;
-      transform: translateY(-50%);
-      opacity: 0.8;
-    }
-
-    .client_section .carousel-control-prev:hover,
-    .client_section .carousel-control-next:hover {
-      opacity: 1;
-    }
-
-    .client_section .carousel-control-prev i,
-    .client_section .carousel-control-next i {
-      color: #fff;
-      font-size: 1.2rem;
-    }
-
-    /* Footer Section */
-    .footer_section {
-      background-color: #1a3c6d;
-      color: #fff;
-      padding: 80px 0 30px;
-    }
-
-    .footer_section h4 {
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 20px;
-      color: #00aaff;
-    }
-
-    .footer_section .contact_link_box a,
-    .footer_section .footer_links a {
-      color: #e0e0e0;
-      font-size: 1rem;
-      margin-bottom: 10px;
-      display: block;
-      transition: color 0.3s ease;
-    }
-
-    .footer_section .contact_link_box a:hover,
-    .footer_section .footer_links a:hover {
-      color: #00aaff;
-    }
-
-    .footer_section .footer_social a {
-      color: #fff;
-      font-size: 1.2rem;
-      margin: 0 10px;
-      transition: color 0.3s ease;
-    }
-
-    .footer_section .footer_social a:hover {
-      color: #00aaff;
-    }
-
-    .footer_section .footer_detail p {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: #e0e0e0;
-    }
-
-    .footer_section form input {
-      width: 100%;
-      padding: 12px;
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 1rem;
-    }
-
-    .footer_section form button {
-      background-color: #00aaff;
-      color: #fff;
-      padding: 12px 30px;
-      border: none;
-      border-radius: 25px;
-      text-transform: uppercase;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
-
-    .footer_section form button:hover {
-      background-color: #0088cc;
-      transform: translateY(-2px);
-    }
-
-    .footer_section .footer-info p {
-      font-size: 0.9rem;
-      color: #e0e0e0;
-      margin-top: 40px;
-    }
-
-    .footer_section .footer-info a {
-      color: #00aaff;
+    .navbar-brand {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: var(--cosmic-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       text-decoration: none;
     }
 
-    .footer_section .footer-info a:hover {
-      text-decoration: underline;
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: var(--space-lg);
+      align-items: center;
+    }
+
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      position: relative;
+      transition: color var(--transition-fast);
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--primary-gradient);
+      transition: width var(--transition-fast);
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Mobile Menu */
+    .mobile-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .mobile-toggle span {
+      width: 28px;
+      height: 3px;
+      background: var(--text-primary);
+      transition: all var(--transition-fast);
+    }
+
+    .mobile-nav {
+      position: fixed;
+      top: 70px;
+      left: 0;
+      right: 0;
+      background: rgba(13, 13, 43, 0.95);
+      backdrop-filter: blur(15px);
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: all var(--transition-normal);
+      padding: var(--space-lg);
+    }
+
+    .mobile-nav.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .mobile-nav-link {
+      display: block;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: var(--space-sm) 0;
+      font-size: 1.2rem;
+      transition: color var(--transition-fast);
+    }
+
+    .mobile-nav-link:hover {
+      color: var(--primary-main);
+    }
+
+    /* === HERO SECTION === */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--dark-primary), var(--dark-secondary));
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--cosmic-gradient);
+      opacity: 0.15;
+      z-index: 1;
+    }
+
+    .particles-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      max-width: 1000px;
+      padding: 0 var(--space-md);
+    }
+
+    .hero-subtitle {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.2rem;
+      color: var(--accent-light);
+      font-weight: 600;
+      margin-bottom: var(--space-md);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 0.8s ease-out 0.3s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(3rem, 9vw, 6rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: var(--space-lg);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: slideUp 0.8s ease-out 0.5s forwards;
+    }
+
+    .gradient-text {
+      background: var(--cosmic-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-description {
+      font-size: 1.3rem;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-xl);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 0.8s ease-out 0.7s forwards;
+    }
+
+    .hero-cta {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 0.8s ease-out 0.9s forwards;
+    }
+
+    /* === BUTTON SYSTEM === */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: var(--space-sm) var(--space-lg);
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all var(--transition-fast);
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    .btn-primary {
+      background: var(--primary-gradient);
+      color: var(--text-primary);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-glow);
+      background: var(--cosmic-gradient);
+    }
+
+    .btn-secondary {
+      background: var(--glass-bg);
+      color: var(--text-primary);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(10px);
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary-main);
+      transform: translateY(-3px);
+      color: var(--text-primary);
+    }
+
+    /* === SECTION SYSTEM === */
+    .section {
+      padding: var(--space-4xl) 0;
+      position: relative;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 var(--space-lg);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: var(--space-3xl);
+    }
+
+    .section-subtitle {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1rem;
+      color: var(--accent-light);
+      font-weight: 600;
+      margin-bottom: var(--space-sm);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 700;
+      margin-bottom: var(--space-md);
+      background: var(--cosmic-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-description {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* === SERVICES GRID === */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--space-lg);
+    }
+
+    .service-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      border: 1px solid var(--glass-border);
+      border-radius: 15px;
+      padding: var(--space-lg);
+      transition: all var(--transition-normal);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--cosmic-gradient);
+      opacity: 0;
+      transition: opacity var(--transition-normal);
+    }
+
+    .service-card:hover::before {
+      opacity: 0.1;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-glow);
+      border-color: var(--primary-main);
+    }
+
+    .service-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--cosmic-gradient);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-md);
+      font-size: 1.6rem;
+      color: var(--text-primary);
+    }
+
+    .service-card h3 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      margin-bottom: var(--space-sm);
+      color: var(--text-primary);
+    }
+
+    .service-card p {
+      color: var(--text-secondary);
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+
+    /* === FOOTER === */
+    .footer {
+      padding: var(--space-lg) 0;
+      background: var(--dark-secondary);
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    /* === ANIMATIONS === */
+    @keyframes slideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* === RESPONSIVE DESIGN === */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .mobile-toggle {
+        display: flex;
+      }
+
+      .hero-title {
+        font-size: clamp(2rem, 7vw, 3.5rem);
+      }
+
+      .hero-description {
+        font-size: 1.1rem;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title {
+        font-size: clamp(2rem, 5vw, 3rem);
+      }
     }
   </style>
 </head>
 
 <body>
-  <div class="hero_area">
-    <div class="hero_bg_box">
-      <img src="images/mainimage.jpeg" alt="">
-    </div>
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="navbar-brand">Web Sapphire</a>
 
-    <!-- header section strats -->
-    <header class="header_section">
-      <div class="container">
-        <nav class="navbar navbar-expand-lg custom_nav-container ">
-          <a class="navbar-brand" href="index.html">
-            <span>
-              CETMED OPAL HEALTHCARE
-            </span>
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class=""> </span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav">
-              <li class="nav-item active">
-                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="about.html"> About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="departments.html">Departments</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="doctors.html">Doctors</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="contact.html">Contact Us</a>
-              </li>
-              <form class="form-inline">
-                <button class="btn my-2 my-sm-0 nav_search-btn" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-              </form>
-            </ul>
-          </div>
-        </nav>
+      <ul class="nav-links">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="mobile-toggle" id="mobileToggle">
+        <span></span>
+        <span></span>
+        <span></span>
       </div>
-    </header>
-    <!-- end header section -->
-    <!-- slider section -->
-    <section class="slider_section ">
-      <div class="container ">
-        <div class="row">
-          <div class="col-md-7">
-            <div class="detail-box">
-              <h1>
-                We Provide Best Healthcare
-              </h1>
-              <p>
-                Explicabo esse amet tempora quibusdam laudantium, laborum eaque magnam fugiat hic? Esse dicta aliquid
-                error repudiandae earum suscipit fugiat molestias, veniam, vel architecto veritatis delectus repellat
-                modi impedit sequi.
-              </p>
-              <div class="btn-box">
-                <a href="" class="btn1">
-                  Read More
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- end slider section -->
+    </div>
+  </nav>
+
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#home" class="mobile-nav-link">Home</a>
+    <a href="#about" class="mobile-nav-link">About</a>
+    <a href="#services" class="mobile-nav-link">Services</a>
+    <a href="#contact" class="mobile-nav-link">Contact</a>
   </div>
 
-  <!-- about section -->
-  <section class="about_section">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-lg-6">
-          <div class="img-box">
-            <img src="images/about-img.jpg" alt="About CETMED OPAL HEALTHCARE">
-          </div>
-        </div>
-        <div class="col-lg-6">
-          <div class="detail-box">
-            <div class="heading_container">
-              <h2>About <span>Us</span></h2>
-            </div>
-            <p>
-              At CETMED OPAL HEALTHCARE, we are dedicated to providing exceptional medical care with a focus on ear,
-              nose, and throat (ENT) specialties. Our team of experienced professionals uses state-of-the-art technology
-              to deliver personalized treatment plans, ensuring the best outcomes for our patients. With a commitment to
-              compassion and excellence, we strive to improve the health and well-being of our community.
-            </p>
-            <a href="about.html">Read More</a>
-          </div>
-        </div>
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="particles-bg" id="particles-js"></div>
+
+    <div class="hero-content">
+      <div class="hero-subtitle">Quantum Innovation</div>
+      <h1 class="hero-title">
+        <span class="gradient-text">Transformative</span><br>
+        Digital Experiences
+      </h1>
+      <p class="hero-description">
+        Unlock the future with cutting-edge solutions powered by AI, blockchain, and quantum technology,
+        designed to elevate your business to new dimensions.
+      </p>
+      <div class="hero-cta">
+        <a href="#services" class="btn btn-primary">
+          <i class="fas fa-rocket"></i>
+          Discover Now
+        </a>
       </div>
     </div>
   </section>
-  <!-- end about section -->
 
-  <!-- services section -->
-  <section class="department_section services-bg-dark" style="background-image: url('images/ear.jpeg');">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-lg-6"></div>
-        <div class="col-lg-6 d-flex align-items-center">
-          <div class="department_container py-5 px-4">
-            <div class="heading_container heading_center">
-              <h2>Our Specialized ENT Services</h2>
-              <p>
-                Comprehensive care for all conditions of the ear, nose, and throat, using the latest technology and
-                techniques.
-              </p>
-            </div>
-            <div class="row">
-              <div class="col-md-6 d-flex justify-content-center p-3">
-                <div class="box">
-                  <div class="img-box p-3">
-                    <img src="images/s1.png" alt="Hearing and Balance">
-                  </div>
-                  <div class="detail-box">
-                    <h5>Hearing & Balance</h5>
-                    <p>
-                      Expert diagnosis and treatment for hearing loss, tinnitus, and balance disorders.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 d-flex justify-content-center p-3">
-                <div class="box">
-                  <div class="img-box p-3">
-                    <img src="images/s2.png" alt="Nasal and Sinus">
-                  </div>
-                  <div class="detail-box">
-                    <h5>Nasal & Sinus</h5>
-                    <p>
-                      Advanced solutions for chronic sinusitis, allergies, and nasal obstruction.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 d-flex justify-content-center p-3">
-                <div class="box">
-                  <div class="img-box p-3">
-                    <img src="images/s3.png" alt="Throat and Voice">
-                  </div>
-                  <div class="detail-box">
-                    <h5>Throat & Voice</h5>
-                    <p>
-                      Specialized care for voice disorders, swallowing difficulties, and throat conditions.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-6 d-flex justify-content-center p-3">
-                <div class="box">
-                  <div class="img-box p-3">
-                    <img src="images/s4.png" alt="Pediatric ENT">
-                  </div>
-                  <div class="detail-box">
-                    <h5>Pediatric ENT</h5>
-                    <p>
-                      Gentle and effective treatment for common childhood ENT problems.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="btn-box mt-4">
-              <a href="departments.html">View All Services</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- end services section -->
-
-  <!-- doctor section -->
-  <section class="doctor_section">
+  <!-- About Section -->
+  <section class="section about" id="about">
     <div class="container">
-      <div class="heading_container heading_center">
-        <h2>Our Doctors</h2>
-        <p class="col-md-10 mx-auto px-0">
-          Meet our team of highly skilled and dedicated ENT specialists, committed to providing exceptional care with
-          compassion and expertise.
+      <div class="section-header">
+        <div class="section-subtitle">Our Vision</div>
+        <h2 class="section-title">Shaping Tomorrow</h2>
+        <p class="section-description">
+          We're pioneers in digital innovation, crafting solutions that blend creativity, technology, and
+          vision to redefine the future.
         </p>
       </div>
-      <div class="row">
-        <div class="col-sm-6 col-lg-4 mx-auto">
-          <div class="box">
-            <div class="img-box">
-              <img src="images/d1.jpg" alt="Dr. Elina Josh">
-            </div>
-            <div class="detail-box">
-              <div class="social_box">
-                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-              </div>
-              <h5>Dr. Elina Josh</h5>
-              <h6>ENT Specialist</h6>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-lg-4 mx-auto">
-          <div class="box">
-            <div class="img-box">
-              <img src="images/d2.jpg" alt="Dr. Adam View">
-            </div>
-            <div class="detail-box">
-              <div class="social_box">
-                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-              </div>
-              <h5>Dr. Adam View</h5>
-              <h6>ENT Specialist</h6>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-6 col-lg-4 mx-auto">
-          <div class="box">
-            <div class="img-box">
-              <img src="images/d3.jpg" alt="Dr. Mia Mike">
-            </div>
-            <div class="detail-box">
-              <div class="social_box">
-                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a>
-                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-              </div>
-              <h5>Dr. Mia Mike</h5>
-              <h6>ENT Specialist</h6>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="btn-box">
-        <a href="doctors.html">View All</a>
-      </div>
     </div>
   </section>
-  <!-- end doctor section -->
 
-  <!-- contact section -->
-  <section class="contact_section">
+  <!-- Services Section -->
+  <section class="section services" id="services">
     <div class="container">
-      <div class="heading_container heading_center">
-        <h2>Get In Touch</h2>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form_container contact-form">
-            <form action="">
-              <div class="form-row">
-                <div class="col-lg-6">
-                  <input type="text" placeholder="Your Name" />
-                </div>
-                <div class="col-lg-6">
-                  <input type="text" placeholder="Phone Number" />
-                </div>
-              </div>
-              <div>
-                <input type="email" placeholder="Email" />
-              </div>
-              <div>
-                <textarea class="message-box" placeholder="Message"></textarea>
-              </div>
-              <div class="btn_box">
-                <button type="submit">SEND</button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="map_container">
-            <div id="googleMap"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- end contact section -->
-
-  <!-- client section -->
-  <section class="client_section">
-    <div class="container">
-      <div class="heading_container heading_center">
-        <h2>Testimonial</h2>
-      </div>
-      <div id="carouselExample2Controls" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <div class="row">
-              <div class="col-md-11 col-lg-10 mx-auto">
-                <div class="box">
-                  <div class="img-box">
-                    <img src="images/client.jpg" alt="Alan Emerson" />
-                  </div>
-                  <div class="detail-box">
-                    <div class="name">
-                      <h6>Alan Emerson</h6>
-                    </div>
-                    <p>
-                      The care I received at CETMED OPAL HEALTHCARE was exceptional. The team was professional,
-                      compassionate, and highly skilled. My treatment was thorough, and I felt supported every step of
-                      the way.
-                    </p>
-                    <i class="fa fa-quote-left" aria-hidden="true"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="row">
-              <div class="col-md-11 col-lg-10 mx-auto">
-                <div class="box">
-                  <div class="img-box">
-                    <img src="images/client.jpg" alt="Sarah Johnson" />
-                  </div>
-                  <div class="detail-box">
-                    <div class="name">
-                      <h6>Sarah Johnson</h6>
-                    </div>
-                    <p>
-                      I was impressed by the advanced technology and expertise at CETMED. The doctors took the time to
-                      explain everything clearly, and I’m thrilled with the results of my treatment.
-                    </p>
-                    <i class="fa fa-quote-left" aria-hidden="true"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-item">
-            <div class="row">
-              <div class="col-md-11 col-lg-10 mx-auto">
-                <div class="box">
-                  <div class="img-box">
-                    <img src="images/client.jpg" alt="Michael Brown" />
-                  </div>
-                  <div class="detail-box">
-                    <div class="name">
-                      <h6>Michael Brown</h6>
-                    </div>
-                    <p>
-                      From the moment I walked in, I felt welcomed and cared for. The staff at CETMED OPAL HEALTHCARE
-                      truly goes above and beyond to ensure patient comfort and satisfaction.
-                    </p>
-                    <i class="fa fa-quote-left" aria-hidden="true"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="carousel_btn-container">
-          <a class="carousel-control-prev" href="#carouselExample2Controls" role="button" data-slide="prev">
-            <i class="fa fa-long-arrow-left" aria-hidden="true"></i>
-            <span class="sr-only">Previous</span>
-          </a>
-          <a class="carousel-control-next" href="#carouselExample2Controls" role="button" data-slide="next">
-            <i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-            <span class="sr-only">Next</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- end client section -->
-
-  <!-- footer section -->
-  <footer class="footer_section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-6 col-lg-3 footer_col">
-          <div class="footer_contact">
-            <h4>Reach at..</h4>
-            <div class="contact_link_box">
-              <a href="#">
-                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span>123 Health St, Medical City</span>
-              </a>
-              <a href="#">
-                <i class="fa fa-phone" aria-hidden="true"></i>
-                <span>Call +01 1234567890</span>
-              </a>
-              <a href="#">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-                <span>info@cetmedopal.com</span>
-              </a>
-            </div>
-          </div>
-          <div class="footer_social">
-            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-            <a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 footer_col">
-          <div class="footer_detail">
-            <h4>About</h4>
-            <p>
-              CETMED OPAL HEALTHCARE is a leading provider of ENT care, offering advanced treatments and compassionate
-              service to improve patient outcomes.
-            </p>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-2 mx-auto footer_col">
-          <div class="footer_link_box">
-            <h4>Links</h4>
-            <div class="footer_links">
-              <a class="active" href="index.html">Home</a>
-              <a href="about.html">About</a>
-              <a href="departments.html">Departments</a>
-              <a href="doctors.html">Doctors</a>
-              <a href="contact.html">Contact Us</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6 col-lg-3 footer_col">
-          <h4>Newsletter</h4>
-          <form action="#">
-            <input type="email" placeholder="Enter email" />
-            <button type="submit">Subscribe</button>
-          </form>
-        </div>
-      </div>
-      <div class="footer-info">
-        <p>
-          &copy; <span id="displayYear"></span> All Rights Reserved
+      <div class="section-header">
+        <div class="section-subtitle">Our Expertise</div>
+        <h2 class="section-title">Next-Gen Solutions</h2>
+        <p class="section-description">
+          Explore our advanced suite of services, from AI-driven insights to quantum-secure blockchain and
+          immersive metaverse experiences.
         </p>
       </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-brain"></i>
+          </div>
+          <h3>AI & Machine Learning</h3>
+          <p>Intelligent algorithms that adapt and evolve, delivering real-time insights and automation for
+            your business.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-cubes"></i>
+          </div>
+          <h3>Blockchain Technology</h3>
+          <p>Secure, transparent, and quantum-resistant blockchain solutions for decentralized applications
+            and data integrity.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-atom"></i>
+          </div>
+          <h3>Quantum Computing</h3>
+          <p>Leverage quantum power for complex computations, optimization, and next-level cryptographic
+            security.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-globe"></i>
+          </div>
+          <h3>Metaverse Development</h3>
+          <p>Create immersive virtual worlds and AR experiences that connect digital and physical realities.
+          </p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>Cybersecurity</h3>
+          <p>AI-powered threat detection and quantum encryption to safeguard your digital assets from any
+            threat.</p>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">
+            <i class="fas fa-satellite"></i>
+          </div>
+          <h3>Space Technology</h3>
+          <p>Advanced satellite computing and interplanetary communication systems for the new space era.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="section contact" id="contact">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-subtitle">Get in Touch</div>
+        <h2 class="section-title">Launch Your Future</h2>
+        <p class="section-description">
+          Ready to revolutionize your business with next-gen technology? Let's create something extraordinary
+          together.
+        </p>
+      </div>
+
+      <div style="text-align: center; margin-top: var(--space-xl);">
+        <a href="mailto:contact@websapphire.io" class="btn btn-primary">
+          <i class="fas fa-paper-plane"></i>
+          Reach Out
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 Web Sapphire Technologies. All rights reserved.</p>
     </div>
   </footer>
-  <!-- footer section -->
 
-  <!-- jQuery -->
-  <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-  <!-- popper js -->
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script>
-  <!-- bootstrap js -->
-  <script type="text/javascript" src="js/bootstrap.js"></script>
-  <!-- owl slider -->
-  <script type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-  <!-- custom js -->
-  <script type="text/javascript" src="js/custom.js"></script>
-  <!-- Google Map -->
-  <script
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap"></script>
-  <!-- End Google Map -->
+  <script>
+    // Register GSAP plugins
+    gsap.registerPlugin(ScrollTrigger, TextPlugin);
+
+    // Initialize Particle System
+    if (typeof particlesJS !== 'undefined') {
+      particlesJS('particles-js', {
+        particles: {
+          number: { value: 100, density: { enable: true, value_area: 800 } },
+          color: { value: ['#00d4ff', '#ff007a', '#66e6ff'] },
+          shape: { type: 'circle' },
+          opacity: { value: 0.6, random: true, anim: { enable: true, speed: 1, opacity_min: 0.2 } },
+          size: { value: 4, random: true, anim: { enable: true, speed: 2, size_min: 0.2 } },
+          line_linked: { enable: true, distance: 120, color: '#00d4ff', opacity: 0.3, width: 1 },
+          move: { enable: true, speed: 3, direction: 'none', random: true, straight: false, out_mode: 'out' }
+        },
+        interactivity: {
+          detect_on: 'canvas',
+          events: { onhover: { enable: true, mode: 'repulse' }, onclick: { enable: true, mode: 'push' }, resize: true },
+          modes: { repulse: { distance: 120, duration: 0.4 }, push: { particles_nb: 4 } }
+        },
+        retina_detect: true
+      });
+    }
+
+    // Initialize Animations
+    function initializeAnimations() {
+      gsap.utils.toArray('.service-card').forEach((card, index) => {
+        gsap.fromTo(card,
+          { opacity: 0, y: 40 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            delay: index * 0.1,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: card, start: 'top 85%', toggleActions: 'play none none reverse' }
+          }
+        );
+      });
+
+      gsap.utils.toArray('.section-header').forEach(header => {
+        gsap.fromTo(header.children,
+          { opacity: 0, y: 20 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: { trigger: header, start: 'top 85%', toggleActions: 'play none none reverse' }
+          }
+        );
+      });
+    }
+
+    // Navbar Scroll Effect
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Mobile Navigation
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mobileNav = document.getElementById('mobileNav');
+    if (mobileToggle && mobileNav) {
+      mobileToggle.addEventListener('click', () => {
+        mobileNav.classList.toggle('active');
+        mobileToggle.classList.toggle('active');
+      });
+
+      document.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileNav.classList.remove('active');
+          mobileToggle.classList.remove('active');
+        });
+      });
+    }
+
+    // Smooth Scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 70,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Service Card Hover
+    document.querySelectorAll('.service-card').forEach(card => {
+      card.addEventListener('mouseenter', function () {
+        gsap.to(this, { y: -8, duration: 0.3, ease: 'power3.out' });
+      });
+      card.addEventListener('mouseleave', function () {
+        gsap.to(this, { y: 0, duration: 0.3, ease: 'power3.out' });
+      });
+    });
+
+    // Initialize animations after page load
+    window.addEventListener('load', initializeAnimations);
+
+    // Console Message
+    console.log(`
+        🌌 Web Sapphire Technologies
+        ⚡ Powered by:
+           • GSAP 3.12.5
+           • Particles.js
+           • Cosmic Gradients
+           • Responsive Design
+        🚀 Explore the future!
+        `);
+  </script>
 </body>
 
 </html>

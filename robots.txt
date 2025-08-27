@@ -1,0 +1,55 @@
+# WebSapphire robots.txt - Production Optimized
+
+User-agent: *
+Allow: /
+
+# Allow all web crawlers access to CSS and JavaScript files
+Allow: /css/
+Allow: /js/
+Allow: /images/
+
+# Block access to admin areas and sensitive files
+Disallow: /admin/
+Disallow: /private/
+Disallow: /.git/
+Disallow: /config/
+Disallow: /*.log$
+Disallow: /*.bak$
+Disallow: /*.tmp$
+
+# Block common exploit attempts
+Disallow: /wp-admin/
+Disallow: /wp-login.php
+Disallow: /wp-content/
+Disallow: /administrator/
+Disallow: /admin.php
+
+# Allow specific bots with higher crawl rate
+User-agent: Googlebot
+Crawl-delay: 1
+
+User-agent: Bingbot
+Crawl-delay: 2
+
+User-agent: Slurp
+Crawl-delay: 2
+
+# Block problematic bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Sitemap location
+Sitemap: https://websapphire.com/sitemap.xml
+
+# Additional sitemaps
+Sitemap: https://websapphire.com/sitemap-images.xml
+Sitemap: https://websapphire.com/sitemap-news.xml

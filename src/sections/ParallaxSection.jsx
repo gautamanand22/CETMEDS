@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import { motion } from 'framer-motion'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -142,16 +143,16 @@ const ParallaxSection = () => {
     return (
         <section
             ref={sectionRef}
-            className="section bg-gradient-to-br from-blue-900 via-blue-800 to-green-900 overflow-hidden snap-start"
+            className="section bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 overflow-hidden snap-start"
         >
             {/* Parallax Background Elements */}
             <div
                 ref={backgroundRef}
-                className="absolute inset-0 opacity-10"
+                className="absolute inset-0 opacity-20"
             >
-                <div className="absolute top-1/4 left-1/6 w-96 h-96 bg-white rounded-full filter blur-3xl"></div>
-                <div className="absolute bottom-1/4 right-1/6 w-80 h-80 bg-white rounded-full filter blur-3xl"></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white rounded-full filter blur-3xl"></div>
+                <div className="absolute top-1/4 left-1/6 w-96 h-96 bg-blue-400/30 rounded-full filter blur-3xl"></div>
+                <div className="absolute bottom-1/4 right-1/6 w-80 h-80 bg-indigo-400/30 rounded-full filter blur-3xl"></div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-400/20 rounded-full filter blur-3xl"></div>
             </div>
 
             {/* Medical Pattern Overlay */}
@@ -159,30 +160,35 @@ const ParallaxSection = () => {
                 <div
                     className="w-full h-full"
                     style={{
-                        backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='white' fill-opacity='0.1'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`,
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23334155' fill-opacity='0.1'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`,
                         backgroundSize: '40px 40px'
                     }}
                 ></div>
             </div>
 
-            <div className="container-custom relative z-10">
-                <div ref={contentRef} className="text-center mb-20">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-2xl mb-6">
-                        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-                        Trusted by Healthcare
-                        <span className="block text-secondary-300">Professionals Worldwide</span>
+            {/* Content */}
+            <div className="relative z-10 container-custom">
+                <motion.div
+                    className="max-w-4xl mx-auto text-center mb-20"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                >
+                    <motion.div
+                        className="inline-block mb-4 px-4 py-2 bg-white backdrop-blur-sm border border-blue-200 rounded-full shadow-sm"
+                        whileHover={{ scale: 1.05 }}
+                    >
+                        <span className="text-blue-600 font-medium">Excellence in Healthcare</span>
+                    </motion.div>
+                    <h2 className="heading-gradient text-slate-900 mb-6">
+                        Trusted by Healthcare Professionals Worldwide
                     </h2>
-
-                    <p className="text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
-                        Join thousands of medical professionals who rely on CETMEDS for
-                        safe, effective, and clinically proven medical solutions.
+                    <p className="text-slate-700 text-lg max-w-2xl mx-auto">
+                        Setting new standards in pharmaceutical excellence with cutting-edge research
+                        and unwavering commitment to patient care.
                     </p>
-                </div>
+                </motion.div>
 
                 {/* Trust Statistics */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
@@ -195,13 +201,13 @@ const ParallaxSection = () => {
                         <div
                             key={index}
                             ref={(el) => statsRef.current[index] = el}
-                            className="text-center bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20"
+                            className="text-center bg-white backdrop-blur-lg rounded-2xl p-6 border border-blue-200 shadow-sm hover:shadow-xl transition-all duration-300"
                         >
                             <div className="text-3xl mb-3">{stat.icon}</div>
-                            <div className="stat-number text-3xl md:text-4xl font-bold text-white mb-2">
+                            <div className="stat-number text-3xl md:text-4xl font-bold text-slate-900 mb-2">
                                 {stat.number}
                             </div>
-                            <div className="text-white/70 font-medium text-sm">
+                            <div className="text-slate-600 font-medium text-sm">
                                 {stat.label}
                             </div>
                         </div>
@@ -210,7 +216,7 @@ const ParallaxSection = () => {
 
                 {/* Certifications */}
                 <div>
-                    <h3 className="text-2xl md:text-3xl font-bold text-white text-center mb-12">
+                    <h3 className="text-2xl md:text-3xl font-bold text-slate-900 text-center mb-12">
                         Quality Certifications & Standards
                     </h3>
 
@@ -219,13 +225,13 @@ const ParallaxSection = () => {
                             <div
                                 key={index}
                                 ref={(el) => certificationsRef.current[index] = el}
-                                className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 text-center border border-white/20 hover:bg-white/20 transition-all duration-300"
+                                className="bg-white backdrop-blur-lg rounded-2xl p-6 text-center border border-blue-200 shadow-sm hover:shadow-xl transition-all duration-300"
                             >
                                 <div className="text-4xl mb-4">{cert.icon}</div>
-                                <h4 className="text-lg font-semibold text-white mb-2">
+                                <h4 className="text-lg font-semibold text-slate-900 mb-2">
                                     {cert.name}
                                 </h4>
-                                <p className="text-white/70 text-sm">
+                                <p className="text-slate-600 text-sm">
                                     {cert.description}
                                 </p>
                             </div>
@@ -235,7 +241,7 @@ const ParallaxSection = () => {
 
                 {/* Call to Action */}
                 <div className="text-center mt-16">
-                    <button className="btn-primary bg-white text-primary-900 hover:bg-white/90">
+                    <button className="btn-primary bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 shadow-lg hover:shadow-xl">
                         Partner With Us
                         <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />

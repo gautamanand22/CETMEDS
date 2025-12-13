@@ -5,8 +5,9 @@ import './index.css'
 
 // Sections - Lazy import for better performance
 import HeroSection from './sections/HeroSection'
-import StatsSection from './sections/StatsSection'
+import AboutSection from './sections/AboutSection'
 import ProductsSection from './sections/ProductsSection'
+import TestimonialsShowcase from './sections/TestimonialsShowcase'
 import ParallaxSection from './sections/ParallaxSection'
 import BenefitsSection from './sections/BenefitsSection'
 import TestimonialsSection from './sections/TestimonialsSection'
@@ -66,6 +67,73 @@ const App = () => {
     }
   }, [initializeGSAP])
 
+  // Smooth snap scroll control (~450ms) for section-to-section navigation
+  useEffect(() => {
+    const container = document.querySelector('.snap-container')
+    if (!container) return
+
+    const sections = Array.from(container.querySelectorAll('section'))
+    let currentIndex = 0
+    let isLocked = false
+    let touchStartY = 0
+    const duration = 450
+
+    const scrollToIndex = (idx) => {
+      if (!sections[idx]) return
+      isLocked = true
+      currentIndex = idx
+      sections[idx].scrollIntoView({ behavior: 'smooth', block: 'start' })
+      window.setTimeout(() => { isLocked = false }, duration + 50)
+    }
+
+    const handleWheel = (e) => {
+      if (Math.abs(e.deltaY) < 30) return
+      e.preventDefault()
+      if (isLocked) return
+      const direction = e.deltaY > 0 ? 1 : -1
+      const nextIndex = Math.min(Math.max(currentIndex + direction, 0), sections.length - 1)
+      if (nextIndex !== currentIndex) {
+        scrollToIndex(nextIndex)
+      }
+    }
+
+    const handleTouchStart = (e) => {
+      touchStartY = e.touches[0].clientY
+    }
+
+    const handleTouchEnd = (e) => {
+      const deltaY = touchStartY - e.changedTouches[0].clientY
+      if (Math.abs(deltaY) < 60 || isLocked) return
+      const direction = deltaY > 0 ? 1 : -1
+      const nextIndex = Math.min(Math.max(currentIndex + direction, 0), sections.length - 1)
+      if (nextIndex !== currentIndex) {
+        scrollToIndex(nextIndex)
+      }
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const idx = sections.findIndex(sec => sec === entry.target)
+          if (idx !== -1) currentIndex = idx
+        }
+      })
+    }, { root: container, threshold: 0.55 })
+
+    sections.forEach(sec => observer.observe(sec))
+
+    container.addEventListener('wheel', handleWheel, { passive: false })
+    container.addEventListener('touchstart', handleTouchStart, { passive: true })
+    container.addEventListener('touchend', handleTouchEnd, { passive: true })
+
+    return () => {
+      observer.disconnect()
+      container.removeEventListener('wheel', handleWheel)
+      container.removeEventListener('touchstart', handleTouchStart)
+      container.removeEventListener('touchend', handleTouchEnd)
+    }
+  }, [])
+
   return (
     <div className="relative bg-white">
       {/* Lightweight Navigation */}
@@ -73,10 +141,11 @@ const App = () => {
 
       {/* Main Content - No scroll progress to reduce scroll events */}
       {/* Main Content */}
-      <main className="relative">
+      <main className="relative snap-container">
         <HeroSection />
-        <StatsSection />
+        <AboutSection />
         <ProductsSection />
+        <TestimonialsShowcase />
         <ParallaxSection />
         <BenefitsSection />
         <TestimonialsSection />

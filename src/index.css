@@ -108,6 +108,15 @@ body {
   z-index: 2;
 }
 
+/* Special handling for stacking cards section */
+.snap-container > section.stacking-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  /* Create internal scroll container for cards */
+  position: relative;
+  min-height: 100vh;
+}
+
 /* Tricolor accent for sections */
 .snap-container > section::before {
   content: "";

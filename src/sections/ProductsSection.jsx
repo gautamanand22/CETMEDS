@@ -1,260 +1,209 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-const ProductsSection = () => {
-    const [currentSlide, setCurrentSlide] = useState(0)
-    const [isPaused, setIsPaused] = useState(false)
-    const scrollLockRef = useRef(0)
-    const touchStartY = useRef(0)
+const ProductCard = ({ product, index }) => {
+    return (
+        <motion.div
+            initial={{ opacity: 0, x: 100 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -100 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="w-full h-full"
+        >
+            <div className="w-full h-full bg-gradient-to-br from-white/95 via-white/90 to-white/85 backdrop-blur-xl overflow-hidden">
+                <div className={`relative h-full overflow-hidden bg-gradient-to-br ${product.gradient} backdrop-blur-xl`}>
+                    <div className="grid lg:grid-cols-2 gap-6 p-6 lg:p-8 items-center h-full max-w-7xl mx-auto">
+                            <div className="space-y-3">
+                                <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/95 backdrop-blur-sm border border-slate-200 rounded-full shadow-lg">
+                                    <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${product.color}`} />
+                                    <span className="text-[10px] font-bold text-slate-900 uppercase tracking-wider">{product.category}</span>
+                                </div>
 
-    const slides = [
+                                <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-slate-900 leading-tight tracking-tight">
+                                    {product.title}
+                                </h3>
+
+                                <p className="text-base md:text-lg font-bold bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] bg-clip-text text-transparent">
+                                    {product.subtitle}
+                                </p>
+
+                                <p className="text-sm md:text-base text-slate-700 leading-relaxed">
+                                    {product.description}
+                                </p>
+
+                                <div className="grid grid-cols-2 gap-2 pt-2">
+                                    {product.features.map((feature, idx) => (
+                                        <div key={idx} className="flex items-center gap-2 text-xs text-slate-800">
+                                            <div className="w-4 h-4 rounded-full bg-gradient-to-r from-[#138808] to-[#2563eb] flex items-center justify-center flex-shrink-0">
+                                                <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                                </svg>
+                                            </div>
+                                            <span className="font-semibold">{feature}</span>
+                                        </div>
+                                    ))}
+                                </div>
+
+                                <div className="flex flex-wrap gap-3 pt-3">
+                                    <button
+                                        onClick={() => window.location.assign('/catalogue')}
+                                        className="px-6 py-2.5 bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] text-white font-bold text-xs rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2"
+                                    >
+                                        <span>View Details</span>
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                        </svg>
+                                    </button>
+                                    <button className="px-6 py-2.5 bg-white/90 backdrop-blur-xl border border-slate-200 text-slate-900 font-bold text-xs rounded-full hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg">
+                                        Request Sample
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div className="relative h-full flex items-center justify-center">
+                                <div className="relative w-full aspect-[3/4] max-h-[500px]">
+                                    <div className={`absolute -inset-8 bg-gradient-to-br ${product.color} rounded-3xl blur-3xl opacity-30 animate-pulse`} />
+                                    <div className="relative h-full bg-gradient-to-br from-white/90 via-white/80 to-white/70 backdrop-blur-2xl border border-white/50 rounded-3xl shadow-2xl p-6 overflow-hidden">
+                                        <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${product.color} rounded-full blur-3xl opacity-20`} />
+                                        <div className={`absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr ${product.color} rounded-full blur-2xl opacity-20`} />
+                                        <img 
+                                            src={product.image}
+                                            alt={product.title}
+                                            className="relative w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.2)]"
+                                        />
+                                        <div className="absolute top-4 left-4 px-3 py-1.5 bg-white/95 backdrop-blur-sm rounded-full border border-white/40 shadow-lg">
+                                            <span className="text-[10px] font-bold bg-gradient-to-r from-[#ff9933] to-[#138808] bg-clip-text text-transparent">Premium Quality</span>
+                                        </div>
+                                        <div className="absolute bottom-4 right-4 px-3 py-1.5 bg-white/95 backdrop-blur-sm rounded-full border border-white/40 shadow-lg">
+                                            <span className="text-[10px] font-bold text-slate-900">FDA Approved</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    <div className="absolute top-6 right-6 w-14 h-14 rounded-full bg-white/95 backdrop-blur-sm border-2 border-slate-200 shadow-lg flex items-center justify-center">
+                        <span className="text-xl font-black bg-gradient-to-r from-[#ff9933] to-[#138808] bg-clip-text text-transparent">
+                            {String(index + 1).padStart(2, '0')}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </motion.div>
+    )
+}
+
+const ProductsSection = () => {
+    const [currentIndex, setCurrentIndex] = useState(0)
+
+    const products = [
         {
             id: 1,
             title: "OpticClear Professional",
+            category: "Eye Care",
             subtitle: "Premium eye care solutions",
-            description: "Clinically engineered eye drops for soothing hydration, clarity, and all-day protection.",
+            description: "Clinically engineered eye drops for soothing hydration, clarity, and all-day protection. Preservative-free formula trusted by ophthalmologists worldwide.",
+            features: ["Preservative-free", "Fast-acting relief", "Doctor recommended", "Long-lasting hydration"],
             image: "/images/moxel.png",
-            gradient: "from-[#ff9933]/40 via-[#ffffff]/40 to-[#138808]/40"
+            gradient: "from-blue-50/90 via-cyan-50/80 to-teal-50/70",
+            color: "from-blue-500 to-cyan-500"
         },
         {
             id: 2,
             title: "EarGuard Advanced",
+            category: "Ear Care",
             subtitle: "Safe and effective ear hygiene",
-            description: "Doctor-trusted formulations for wax removal, comfort, and infection prevention.",
+            description: "Doctor-trusted formulations for wax removal, comfort, and infection prevention. Gentle yet effective solution for complete ear health.",
+            features: ["Gentle formula", "Pain-free cleansing", "Clinically tested", "Safe for all ages"],
             image: "/images/olpat.png",
-            gradient: "from-[#ff9933]/40 via-[#ffffff]/40 to-[#138808]/40"
+            gradient: "from-purple-50/90 via-pink-50/80 to-rose-50/70",
+            color: "from-purple-500 to-pink-500"
         },
         {
             id: 3,
             title: "WoundCare+ Defense",
+            category: "Wound Care",
             subtitle: "Rapid healing and protection",
-            description: "Advanced antiseptic blends for faster recovery and scar reduction, designed for sensitive skin.",
+            description: "Advanced antiseptic blends for faster recovery and scar reduction. Specially designed for sensitive skin with powerful healing properties.",
+            features: ["Antiseptic protection", "Scar reduction", "Fast healing", "Skin-friendly"],
             image: "/images/tobran.png",
-            gradient: "from-[#ff9933]/40 via-[#ffffff]/40 to-[#138808]/40"
+            gradient: "from-emerald-50/90 via-green-50/80 to-lime-50/70",
+            color: "from-emerald-500 to-green-500"
         },
         {
             id: 4,
             title: "NasalPure Relief",
+            category: "Nasal Care",
             subtitle: "Clear, gentle breathing",
-            description: "Saline-powered nasal care that keeps airways clear, balanced, and comfortable.",
+            description: "Saline-powered nasal care that keeps airways clear, balanced, and comfortable. Natural relief without dependency or side effects.",
+            features: ["Natural saline", "Non-addictive", "Instant relief", "Moisturizing"],
             image: "/images/moxel.png",
-            gradient: "from-[#ff9933]/40 via-[#ffffff]/40 to-[#138808]/40"
+            gradient: "from-orange-50/90 via-amber-50/80 to-yellow-50/70",
+            color: "from-orange-500 to-amber-500"
         }
     ]
 
-    const nextSlide = useCallback(() => {
-        setCurrentSlide((prev) => (prev + 1) % slides.length)
-    }, [slides.length])
-
-    const prevSlide = useCallback(() => {
-        setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)
-    }, [slides.length])
-
-    const goToSlide = useCallback((index) => {
-        setCurrentSlide(index)
-    }, [])
-
-    const handleWheel = useCallback((event) => {
-        const now = performance.now()
-        if (now - scrollLockRef.current < 600) return
-        if (Math.abs(event.deltaY) < 20) return
-
-        scrollLockRef.current = now
-        setIsPaused(true)
-        setTimeout(() => setIsPaused(false), 1400)
-
-        if (event.deltaY > 0) {
-            nextSlide()
-        } else {
-            prevSlide()
-        }
-    }, [nextSlide, prevSlide])
-
-    const handleTouchStart = useCallback((event) => {
-        touchStartY.current = event.touches[0].clientY
-    }, [])
-
-    const handleTouchEnd = useCallback((event) => {
-        const deltaY = event.changedTouches[0].clientY - touchStartY.current
-        if (Math.abs(deltaY) < 45) return
-
-        setIsPaused(true)
-        setTimeout(() => setIsPaused(false), 1800)
-        if (deltaY > 0) {
-            prevSlide()
-        } else {
-            nextSlide()
-        }
-    }, [nextSlide, prevSlide])
-
+    // Auto-rotate every 5 seconds
     useEffect(() => {
-        if (!isPaused) {
-            const timer = setInterval(nextSlide, 5500)
-            return () => clearInterval(timer)
-        }
-    }, [isPaused, nextSlide])
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % products.length)
+        }, 5000)
+
+        return () => clearInterval(interval)
+    }, [products.length])
 
     return (
-        <section
-            id="products"
-            className="relative min-h-screen overflow-hidden bg-white snap-start section-blend"
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-            onWheel={handleWheel}
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
-        >
-            <AnimatePresence mode="wait">
-                <motion.div
-                    key={currentSlide}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.7, ease: "easeInOut" }}
-                    className="absolute inset-0"
-                >
-                    <div className="absolute inset-0">
-                        <div className={`absolute inset-0 bg-gradient-to-br ${slides[currentSlide].gradient}`} />
+        <section id="products" className="relative h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 pt-24 px-6 pb-6 flex flex-col">
+            {/* Featured Products Header */}
+            <div className="text-center mb-6">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 leading-tight tracking-tight">
+                    Featured <span className="bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] bg-clip-text text-transparent">Products</span>
+                </h2>
+            </div>
+
+            {/* Full Width Cards Container */}
+            <div className="relative flex-1 w-full overflow-hidden rounded-2xl shadow-2xl">
+                <AnimatePresence mode="wait">
+                    <ProductCard 
+                        key={currentIndex} 
+                        product={products[currentIndex]} 
+                        index={currentIndex}
+                    />
+                </AnimatePresence>
+
+                    {/* Navigation Dots */}
+                    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-50">
+                        {products.map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => setCurrentIndex(index)}
+                                className={`transition-all duration-300 rounded-full ${
+                                    index === currentIndex 
+                                        ? 'w-12 h-3 bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808]' 
+                                        : 'w-3 h-3 bg-white/40 hover:bg-white/60'
+                                }`}
+                            />
+                        ))}
                     </div>
 
-                    <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-18 lg:py-20">
-                        <div className="flex flex-col gap-12 lg:gap-14">
-                            <div className="flex justify-center">
-                                <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.7 }}
-                                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/98 backdrop-blur-2xl border border-slate-200/60 rounded-full text-xs font-bold text-slate-900 shadow-lg shadow-slate-900/10 hover:shadow-xl hover:scale-105 transition-all duration-300"
-                                >
-                                    <span className="bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] bg-clip-text text-transparent">Our Medical Product Range</span>
-                                </motion.div>
-                            </div>
-
-                            <div className="grid lg:grid-cols-2 gap-12 xl:gap-16 items-center">
-                                <motion.div
-                                    initial={{ opacity: 0, y: 40 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.8, delay: 0.25 }}
-                                    className="space-y-6 max-w-2xl lg:pr-6"
-                                >
-                                    <motion.div
-                                        initial={{ opacity: 0, scale: 0.9 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        transition={{ duration: 0.6, delay: 0.3 }}
-                                        className="inline-flex items-center gap-2 px-4 py-2 bg-white/98 backdrop-blur-2xl border border-slate-200/60 rounded-full text-xs font-bold shadow-md shadow-slate-900/10"
-                                    >
-                                        <span className="bg-gradient-to-r from-[#ff9933] to-[#138808] bg-clip-text text-transparent">{slides[currentSlide].subtitle}</span>
-                                    </motion.div>
-                                    <h3 className="text-3xl md:text-4xl xl:text-5xl font-black leading-tight text-slate-950 tracking-tight" style={{
-                                        textShadow: '0 2px 20px rgba(255, 255, 255, 0.4), 0 1px 3px rgba(0, 0, 0, 0.1)'
-                                    }}>
-                                        {slides[currentSlide].title}
-                                    </h3>
-                                    <p className="text-base md:text-lg text-slate-600 max-w-2xl leading-relaxed font-medium">
-                                        {slides[currentSlide].description}
-                                    </p>
-                                    <div className="flex flex-wrap gap-2.5 pt-2">
-                                        {["FDA Approved", "Clinically Tested", "Patient Preferred"].map((item, idx) => (
-                                            <motion.span
-                                                key={item}
-                                                initial={{ opacity: 0, scale: 0.8 }}
-                                                animate={{ opacity: 1, scale: 1 }}
-                                                transition={{ duration: 0.5, delay: 0.5 + idx * 0.1 }}
-                                                className="px-4 py-2 rounded-full bg-white/98 border border-slate-200/60 text-xs font-bold shadow-md shadow-slate-900/10 text-slate-900 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-default backdrop-blur-sm"
-                                            >
-                                                {item}
-                                            </motion.span>
-                                        ))}
-                                    </div>
-                                    <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                                        <button
-                                            onClick={() => window.location.assign('/catalogue')}
-                                            className="btn-primary group"
-                                        >
-                                            <span>View Details</span>
-                                            <svg className="w-5 h-5 transition-transform group-hover:translate-x-1 duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                            </svg>
-                                        </button>
-                                        <button className="btn-secondary group">
-                                            <span>Download Catalog</span>
-                                            <svg className="w-5 h-5 transition-transform group-hover:translate-x-1 duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
-                                                <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </motion.div>
-
-                                <motion.div
-                                    initial={{ opacity: 0, x: 50 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ duration: 0.8, delay: 0.35 }}
-                                    className="relative h-full flex items-center justify-center lg:justify-end"
-                                >
-                                    <div className="relative w-full max-w-xl aspect-[3/4] max-h-[68vh]">
-                                        <motion.div
-                                            initial={{ opacity: 0, scale: 0.9 }}
-                                            animate={{ opacity: 1, scale: 1 }}
-                                            transition={{ duration: 0.8, delay: 0.4 }}
-                                            className="absolute inset-0 bg-white/10 backdrop-blur-lg border border-white/15 rounded-3xl shadow-2xl" />
-
-                                        <motion.img
-                                            key={slides[currentSlide].image}
-                                            initial={{ opacity: 0, y: 30, scale: 0.96 }}
-                                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                                            transition={{ duration: 0.9, ease: "easeOut" }}
-                                            src={slides[currentSlide].image}
-                                            alt={slides[currentSlide].title}
-                                            className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_20px_60px_rgba(0,0,0,0.45)]"
-                                        />
-
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 20 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{ duration: 0.6, delay: 0.65 }}
-                                            className="absolute -top-6 left-6 px-4 py-2 rounded-full bg-white/15 border border-white/25 text-white text-sm backdrop-blur-md"
-                                        >
-                                            Flagship Series
-                                        </motion.div>
-
-                                        <motion.div
-                                            initial={{ opacity: 0, y: 20 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{ duration: 0.6, delay: 0.75 }}
-                                            className="absolute -bottom-8 right-6 px-4 py-2 rounded-full bg-white/15 border border-white/25 text-white text-sm backdrop-blur-md"
-                                        >
-                                            Patient Preferred
-                                        </motion.div>
-                                    </div>
-                                </motion.div>
-                            </div>
-                        </div>
-                    </div>
-                </motion.div>
-            </AnimatePresence>
-
-            <div className="absolute inset-0 pointer-events-none">
-                <div className="flex justify-between items-center h-full px-4 md:px-8 lg:px-12 xl:px-16">
+                    {/* Navigation Arrows */}
                     <button
-                        onClick={prevSlide}
-                        className="pointer-events-auto w-11 h-11 md:w-12 md:h-12 rounded-full bg-white/15 border border-white/25 text-white backdrop-blur-md hover:bg-white/25 transition"
-                        aria-label="Previous"
+                        onClick={() => setCurrentIndex((prev) => (prev - 1 + products.length) % products.length)}
+                        className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/90 backdrop-blur-sm border border-slate-200 shadow-lg hover:scale-110 transition-transform flex items-center justify-center z-50"
                     >
-                        <svg className="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                        <svg className="w-6 h-6 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
                         </svg>
                     </button>
                     <button
-                        onClick={nextSlide}
-                        className="pointer-events-auto w-11 h-11 md:w-12 md:h-12 rounded-full bg-white/15 border border-white/25 text-white backdrop-blur-md hover:bg-white/25 transition"
-                        aria-label="Next"
+                        onClick={() => setCurrentIndex((prev) => (prev + 1) % products.length)}
+                        className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/90 backdrop-blur-sm border border-slate-200 shadow-lg hover:scale-110 transition-transform flex items-center justify-center z-50"
                     >
-                        <svg className="w-6 h-6 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                        <svg className="w-6 h-6 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
                         </svg>
                     </button>
                 </div>
-            </div>
         </section>
     )
 }

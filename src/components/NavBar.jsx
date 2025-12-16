@@ -15,10 +15,10 @@ const NavBar = () => {
         const scrollY = window.scrollY
         const newIsScrolled = scrollY > 20
 
-        // Detect direction to hide/show
-        if (scrollY > lastScrollY.current + 8 && scrollY > 80) {
+        // Hide on any scroll down, show on any scroll up (even 1px)
+        if (scrollY > lastScrollY.current && scrollY > 50) {
             setIsHidden(true)
-        } else if (scrollY < lastScrollY.current - 8) {
+        } else if (scrollY < lastScrollY.current) {
             setIsHidden(false)
         }
 
@@ -62,7 +62,6 @@ const NavBar = () => {
         { name: 'Products', href: '#products' },
         { name: 'Benefits', href: '#benefits' },
         { name: 'Testimonials', href: '#testimonials' },
-        { name: 'Contact', href: '#contact' }
     ]
 
     const handleNavClick = useCallback((href) => {

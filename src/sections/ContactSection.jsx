@@ -25,18 +25,14 @@ const ContactSection = () => {
         <section
             id="contact"
             ref={sectionRef}
-            className="pt-32 pb-0 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 relative overflow-hidden"
+            className="pt-32 pb-0 relative overflow-hidden bg-white"
         >
-            {/* Subtle Background Pattern */}
-            <div className="absolute inset-0 opacity-20">
-                <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/30 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-20 right-10 w-72 h-72 bg-indigo-400/30 rounded-full blur-3xl"></div>
-            </div>
+
 
             <div className="container-custom relative z-10">
                 {/* Title */}
                 <div className="text-center mb-20">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-6">
+                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 rounded-full text-sm font-medium mb-6">
                         <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>

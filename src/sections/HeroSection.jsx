@@ -12,10 +12,11 @@ const HeroSection = () => {
             title: "Cetmeds Opal Health Care",
             subtitle: "Integrated eye, ear, and ENT care crafted by specialists.",
             description: "We combine clinical rigor with modern formulations to deliver reliable outcomes for patients and practitioners worldwide.",
-            image: "/images/hero-img.png",
+            image: "/images/tobran.png",
             bg: "/images/hero-bg.png",
-            tone: "from-slate-700 via-sky-700 to-cyan-700",
-            pill: "Global Quality Standards"
+            tone: "from-[#ff9933] via-[#ffffff] to-[#138808]",
+            pill: "Global Quality Standards",
+            textTheme: "dark" // saffron top, white middle, green bottom
         },
         {
             id: 2,
@@ -23,10 +24,11 @@ const HeroSection = () => {
             title: "Trusted by Clinicians",
             subtitle: "FDA-aligned, ISO-certified manufacturing with uncompromised safety.",
             description: "Our portfolio is engineered for efficacy, consistency, and patient comfort, backed by stringent testing protocols.",
-            image: "/images/static-img.png",
+            image: "/images/opal.png",
             bg: "/images/hero-bg.png",
-            tone: "from-slate-700 via-sky-800 to-blue-700",
-            pill: "Clinically Proven"
+            tone: "from-[#ff9933] via-[#ffffff] to-[#138808]",
+            pill: "Clinically Proven",
+            textTheme: "dark"
         },
         {
             id: 3,
@@ -34,10 +36,11 @@ const HeroSection = () => {
             title: "Precision in Every Drop",
             subtitle: "Adaptive solutions for modern lifestyles and digital fatigue.",
             description: "Ergonomic packaging, preservative-free options, and advanced soothing agents ensure comfort from the first use.",
-            image: "/images/Final.png",
+            image: "/images/opal.png",
             bg: "/images/hero-bg.png",
-            tone: "from-slate-700 via-emerald-700 to-sky-800",
-            pill: "Comfort Optimized"
+            tone: "from-[#ff9933] via-[#ffffff] to-[#138808]",
+            pill: "Comfort Optimized",
+            textTheme: "dark"
         }
     ]
 
@@ -70,171 +73,195 @@ const HeroSection = () => {
     return (
         <section
             id="home"
-            className="relative h-screen w-full overflow-hidden bg-slate-900 section-blend"
+            className="relative h-screen w-full overflow-hidden bg-white section-blend"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
         >
             <AnimatePresence mode="wait">
                 <motion.div
                     key={currentSlide}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.7, ease: "easeInOut" }}
+                    initial={{ opacity: 0, scale: 1.05 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0, scale: 0.95 }}
+                    transition={{ duration: 1, ease: "easeInOut" }}
                     className="absolute inset-0"
                 >
-                    <div className="absolute inset-0">
-                        <div className={`absolute inset-0 bg-gradient-to-br ${slides[currentSlide].tone}`} />
-                        <motion.img
-                            key={slides[currentSlide].bg}
-                            initial={{ scale: 1.06 }}
-                            animate={{ scale: 1 }}
-                            transition={{ duration: 7, ease: "easeOut" }}
-                            src={slides[currentSlide].bg}
-                            alt="Background"
-                            className="w-full h-full object-cover opacity-25"
-                        />
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.08),transparent_35%),radial-gradient(circle_at_80%_10%,rgba(255,255,255,0.06),transparent_32%),radial-gradient(circle_at_50%_80%,rgba(255,255,255,0.05),transparent_35%)]" />
+                    <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-slate-50">
+                        {/* Subtle tricolor gradient overlay */}
+                        <div className={`absolute inset-0 bg-gradient-to-br ${slides[currentSlide].tone} opacity-35`} style={{ backgroundSize: '120% 120%' }} />
+                        {/* Mesh gradient for depth */}
+                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,153,51,0.08),transparent_50%),radial-gradient(circle_at_70%_80%,rgba(19,136,8,0.08),transparent_50%)]" />
+                        {/* Subtle noise texture */}
+                        <div className="absolute inset-0 opacity-[0.015]" style={{ 
+                            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' /%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' /%3E%3C/svg%3E")',
+                            backgroundSize: '200px 200px'
+                        }} />
                     </div>
 
-                    <div className="relative h-full w-full px-6 sm:px-8 lg:px-14 xl:px-18 pt-24 pb-18">
-                        <div className="grid lg:grid-cols-2 gap-12 xl:gap-16 items-center h-full">
-                            <div className="space-y-8 text-white max-w-5xl">
+                    <div className="relative h-full w-full px-6 sm:px-8 lg:px-16 xl:px-20 pt-20 pb-12">
+                        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 xl:gap-16 items-center h-full max-w-[1600px] mx-auto">
+                            <div className="space-y-6 max-w-4xl">
                                 <motion.div
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    transition={{ duration: 0.6, delay: 0.2 }}
-                                    className="inline-flex items-center gap-3 px-5 py-2.5 bg-white/10 backdrop-blur-md border border-white/15 rounded-full"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.7, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                                    className="inline-flex items-center gap-3 px-5 py-2.5 bg-white/98 backdrop-blur-2xl border border-slate-200/60 rounded-full shadow-lg shadow-slate-900/10 hover:shadow-xl hover:scale-105 transition-all duration-300"
                                 >
-                                    <span className="w-2 h-2 bg-emerald-400 rounded-full animate-pulse" />
-                                    <span className="text-sm font-semibold tracking-[0.12em] uppercase">{slides[currentSlide].badge}</span>
+                                    <span className="relative flex h-2.5 w-2.5">
+                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#138808] opacity-75"></span>
+                                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#138808]"></span>
+                                    </span>
+                                    <span className="text-xs font-bold tracking-[0.15em] uppercase text-slate-900">{slides[currentSlide].badge}</span>
                                 </motion.div>
 
                                 <motion.h1
-                                    initial={{ opacity: 0, y: 18 }}
+                                    initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.8, delay: 0.35 }}
-                                    className="text-5xl md:text-6xl lg:text-7xl font-extrabold leading-[1.05]"
+                                    transition={{ duration: 0.9, delay: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
+                                    className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.08] text-slate-950 tracking-tight"
+                                    style={{
+                                        textShadow: '0 2px 20px rgba(255, 255, 255, 0.4), 0 1px 3px rgba(0, 0, 0, 0.1)'
+                                    }}
                                 >
                                     {slides[currentSlide].title}
                                 </motion.h1>
 
                                 <motion.p
-                                    initial={{ opacity: 0, y: 18 }}
+                                    initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.8, delay: 0.5 }}
-                                    className="text-xl lg:text-2xl text-white/85 max-w-3xl"
+                                    transition={{ duration: 0.9, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+                                    className="text-lg lg:text-xl xl:text-2xl text-slate-700 max-w-3xl font-semibold leading-relaxed"
+                                    style={{
+                                        textShadow: '0 1px 10px rgba(255, 255, 255, 0.3)'
+                                    }}
                                 >
                                     {slides[currentSlide].subtitle}
                                 </motion.p>
 
                                 <motion.p
-                                    initial={{ opacity: 0, y: 12 }}
+                                    initial={{ opacity: 0, y: 15 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.75, delay: 0.65 }}
-                                    className="text-base md:text-lg text-slate-200/90 max-w-3xl leading-relaxed"
+                                    transition={{ duration: 0.9, delay: 0.55, ease: [0.25, 0.1, 0.25, 1] }}
+                                    className="text-base lg:text-lg text-slate-600 max-w-2xl leading-relaxed font-medium"
                                 >
                                     {slides[currentSlide].description}
                                 </motion.p>
 
                                 <motion.div
-                                    initial={{ opacity: 0, y: 12 }}
+                                    initial={{ opacity: 0, y: 15 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.7, delay: 0.8 }}
-                                    className="flex flex-wrap gap-3"
+                                    transition={{ duration: 0.8, delay: 0.7, ease: [0.25, 0.1, 0.25, 1] }}
+                                    className="flex flex-wrap gap-2.5 pt-1"
                                 >
-                                    {[slides[currentSlide].pill, 'ISO Certified Facilities', 'Clinician Trusted'].map((pill, idx) => (
-                                        <span
+                                    {[slides[currentSlide].pill, 'ISO Certified', 'Clinician Trusted'].map((pill, idx) => (
+                                        <motion.span
                                             key={pill}
-                                            className="px-4 py-2 rounded-full bg-white/10 border border-white/20 text-sm font-medium backdrop-blur-sm"
-                                            style={{ animationDelay: `${idx * 0.05}s` }}
+                                            initial={{ opacity: 0, scale: 0.8 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            transition={{ duration: 0.5, delay: 0.7 + idx * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+                                            className="group px-4 py-2 rounded-full bg-white/98 border border-slate-200/60 text-xs font-bold shadow-md shadow-slate-900/10 text-slate-900 hover:shadow-lg hover:scale-105 hover:border-slate-300 transition-all duration-300 cursor-default backdrop-blur-sm"
                                         >
-                                            {pill}
-                                        </span>
+                                            <span className="bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] bg-clip-text text-transparent">{pill}</span>
+                                        </motion.span>
                                     ))}
                                 </motion.div>
 
                                 <motion.div
-                                    initial={{ opacity: 0, y: 12 }}
+                                    initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.8, delay: 0.95 }}
-                                    className="flex flex-col sm:flex-row gap-4"
+                                    transition={{ duration: 0.9, delay: 0.85, ease: [0.25, 0.1, 0.25, 1] }}
+                                    className="flex flex-col sm:flex-row gap-4 pt-3"
                                 >
                                     <button
                                         onClick={() => scrollToSection('products')}
-                                        className="group px-8 py-4 rounded-full bg-white text-slate-900 font-semibold text-lg flex items-center gap-2 shadow-xl hover:-translate-y-1 hover:shadow-2xl transition"
+                                        className="btn-primary group"
                                     >
-                                        Explore Portfolio
-                                        <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                        <span>Explore Portfolio</span>
+                                        <svg className="w-5 h-5 transition-transform group-hover:translate-x-1 duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                         </svg>
                                     </button>
                                     <button
                                         onClick={() => scrollToSection('contact')}
-                                        className="px-8 py-4 rounded-full border border-white/25 bg-white/10 text-white font-semibold text-lg backdrop-blur-md hover:bg-white/15 hover:-translate-y-1 transition"
+                                        className="btn-secondary group"
                                     >
-                                        Partner With Us
+                                        <span>Partner With Us</span>
+                                        <svg className="w-5 h-5 transition-transform group-hover:translate-x-1 duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                        </svg>
                                     </button>
                                 </motion.div>
 
                                 <motion.div
-                                    initial={{ opacity: 0, y: 12 }}
+                                    initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    transition={{ duration: 0.7, delay: 1.45 }}
-                                    className="flex flex-wrap gap-8 pt-2 text-white/85"
+                                    transition={{ duration: 0.8, delay: 1.05, ease: [0.25, 0.1, 0.25, 1] }}
+                                    className="flex flex-wrap gap-8 pt-4 items-center"
                                 >
-                                    <div>
-                                        <div className="text-3xl font-bold text-white">25+</div>
-                                        <div className="text-sm">Years of pharmaceutical expertise</div>
+                                    <div className="group">
+                                        <div className="text-3xl font-black bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] bg-clip-text text-transparent">25+</div>
+                                        <div className="text-xs text-slate-600 font-semibold mt-1">Years Excellence</div>
                                     </div>
-                                    <div className="h-12 w-px bg-white/20" />
-                                    <div>
-                                        <div className="text-3xl font-bold text-white">50K+</div>
-                                        <div className="text-sm">Patients served globally</div>
+                                    <div className="h-10 w-px bg-gradient-to-b from-transparent via-slate-300 to-transparent" />
+                                    <div className="group">
+                                        <div className="text-3xl font-black bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] bg-clip-text text-transparent">50K+</div>
+                                        <div className="text-xs text-slate-600 font-semibold mt-1">Patients Served</div>
                                     </div>
-                                    <div className="h-12 w-px bg-white/20" />
-                                    <div>
-                                        <div className="text-3xl font-bold text-white">120+</div>
-                                        <div className="text-sm">Healthcare partners</div>
+                                    <div className="h-10 w-px bg-gradient-to-b from-transparent via-slate-300 to-transparent" />
+                                    <div className="group">
+                                        <div className="text-3xl font-black bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] bg-clip-text text-transparent">120+</div>
+                                        <div className="text-xs text-slate-600 font-semibold mt-1">Healthcare Partners</div>
                                     </div>
                                 </motion.div>
                             </div>
 
                             <motion.div
-                                initial={{ opacity: 0, x: 50 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: 50 }}
-                                transition={{ duration: 0.85, ease: "easeOut", delay: 0.35 }}
+                                initial={{ opacity: 0, x: 50, scale: 0.95 }}
+                                animate={{ opacity: 1, x: 0, scale: 1 }}
+                                exit={{ opacity: 0, x: 30, scale: 0.95 }}
+                                transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1], delay: 0.3 }}
                                 className="relative h-full flex items-center justify-center"
                             >
-                                <div className="relative w-full max-w-xl xl:max-w-2xl aspect-[4/5] max-h-[72vh]">
-                                    <div className="absolute -inset-4 md:-inset-6 rounded-3xl bg-gradient-to-tr from-white/15 via-cyan-200/10 to-emerald-200/12 blur-3xl" />
-                                    <div className="absolute inset-0 bg-white/12 backdrop-blur-2xl border border-white/20 rounded-3xl shadow-2xl" />
+                                <div className="relative w-full max-w-lg xl:max-w-xl aspect-[4/5] max-h-[70vh]">
+                                    {/* Glow effect */}
+                                    <div className="absolute -inset-8 bg-gradient-to-br from-[#ff9933]/20 via-[#2563eb]/20 to-[#138808]/20 rounded-[3rem] blur-3xl opacity-60" />
+                                    
+                                    {/* Glass card */}
+                                    <div className="absolute inset-0 bg-gradient-to-br from-white/80 via-white/70 to-white/60 backdrop-blur-xl border border-white/40 rounded-3xl shadow-[0_20px_70px_-15px_rgba(0,0,0,0.3)] overflow-hidden">
+                                        {/* Shimmer effect */}
+                                        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/30 to-transparent -translate-x-full animate-shimmer" 
+                                             style={{ animation: 'shimmer 3s infinite' }} />
+                                    </div>
+                                    
+                                    {/* Product image */}
                                     <motion.img
                                         key={slides[currentSlide].image}
-                                        initial={{ opacity: 0, y: 24, scale: 0.96 }}
+                                        initial={{ opacity: 0, y: 30, scale: 0.9 }}
                                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                                        exit={{ opacity: 0, y: 24, scale: 0.96 }}
-                                        transition={{ duration: 0.9, ease: "easeOut" }}
+                                        exit={{ opacity: 0, y: 20, scale: 0.9 }}
+                                        transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1] }}
                                         src={slides[currentSlide].image}
                                         alt={slides[currentSlide].title}
-                                        className="relative z-10 w-full h-full object-contain drop-shadow-[0_20px_60px_rgba(0,0,0,0.35)]"
+                                        className="relative z-10 w-full h-full object-contain p-8 drop-shadow-[0_25px_70px_rgba(0,0,0,0.25)]"
                                     />
+                                    
+                                    {/* Floating badges */}
                                     <motion.div
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.6, delay: 0.6 }}
-                                        className="absolute -top-5 left-4 px-4 py-2 rounded-full bg-white/18 border border-white/25 text-white text-sm backdrop-blur-md"
+                                        initial={{ opacity: 0, y: -20, x: -10 }}
+                                        animate={{ opacity: 1, y: 0, x: 0 }}
+                                        transition={{ duration: 0.7, delay: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+                                        className="absolute -top-3 -left-3 px-4 py-2.5 rounded-2xl bg-white/95 border border-slate-200/60 shadow-xl shadow-slate-900/10 backdrop-blur-sm"
                                     >
-                                        Flagship Visual
+                                        <div className="text-xs font-bold bg-gradient-to-r from-[#ff9933] to-[#138808] bg-clip-text text-transparent">Premium Quality</div>
                                     </motion.div>
+                                    
                                     <motion.div
-                                        initial={{ opacity: 0, y: 20 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ duration: 0.6, delay: 0.7 }}
-                                        className="absolute -bottom-7 right-4 px-4 py-2 rounded-full bg-white/18 border border-white/25 text-white text-sm backdrop-blur-md"
+                                        initial={{ opacity: 0, y: 20, x: 10 }}
+                                        animate={{ opacity: 1, y: 0, x: 0 }}
+                                        transition={{ duration: 0.7, delay: 1, ease: [0.25, 0.1, 0.25, 1] }}
+                                        className="absolute -bottom-3 -right-3 px-4 py-2.5 rounded-2xl bg-white/95 border border-slate-200/60 shadow-xl shadow-slate-900/10 backdrop-blur-sm"
                                     >
-                                        Replace with product shot
+                                        <div className="text-xs font-bold bg-gradient-to-r from-[#2563eb] to-[#138808] bg-clip-text text-transparent">FDA Approved</div>
                                     </motion.div>
                                 </div>
                             </motion.div>
@@ -244,7 +271,7 @@ const HeroSection = () => {
             </AnimatePresence>
 
 
-            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-3">
+            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2.5 bg-white/95 backdrop-blur-xl px-4 py-3 rounded-full shadow-lg shadow-slate-900/10 border border-slate-200/60">
                 {slides.map((slide, idx) => (
                     <button
                         key={slide.id}

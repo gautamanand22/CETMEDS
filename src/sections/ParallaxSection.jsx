@@ -98,28 +98,17 @@ const ParallaxSection = () => {
     return (
         <section
             ref={sectionRef}
-            className="section bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 overflow-hidden snap-start min-h-screen flex items-center"
+            className="section overflow-hidden snap-start min-h-screen flex items-center bg-white"
         >
             {/* Parallax Background Elements */}
             <div
                 ref={backgroundRef}
                 className="absolute inset-0 opacity-20"
             >
-                <div className="absolute top-1/4 left-1/6 w-80 h-80 md:w-96 md:h-96 bg-blue-400/30 rounded-full filter blur-3xl"></div>
-                <div className="absolute bottom-1/4 right-1/6 w-72 h-72 md:w-80 md:h-80 bg-indigo-400/30 rounded-full filter blur-3xl"></div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-56 h-56 md:w-64 md:h-64 bg-purple-400/20 rounded-full filter blur-3xl"></div>
+
             </div>
 
-            {/* Medical Pattern Overlay */}
-            <div className="absolute inset-0 opacity-5">
-                <div
-                    className="w-full h-full"
-                    style={{
-                        backgroundImage: `url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23334155' fill-opacity='0.1'%3E%3Cpath d='M20 20c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10zm10 0c0-5.5-4.5-10-10-10s-10 4.5-10 10 4.5 10 10 10 10-4.5 10-10z'/%3E%3C/g%3E%3C/svg%3E")`,
-                        backgroundSize: '40px 40px'
-                    }}
-                ></div>
-            </div>
+
 
             {/* Content */}
             <div className="relative z-10 container-custom py-10 lg:py-12 flex flex-col gap-10 lg:gap-12 max-w-6xl mx-auto">
@@ -194,7 +183,7 @@ const ParallaxSection = () => {
                 </div>
 
                 <motion.div
-                    className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl shadow-strong px-8 py-10 text-white"
+                    className="relative overflow-hidden bg-gradient-to-r from-blue-600 to-blue-700 rounded-2xl shadow-xl px-8 py-10 text-white"
                     initial={{ opacity: 0, y: 15 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}

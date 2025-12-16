@@ -67,7 +67,7 @@ const App = () => {
     }
   }, [initializeGSAP])
 
-  // Smooth snap scroll control (~450ms) for section-to-section navigation
+  // Ultra-smooth snap scroll control with awesome transitions
   useEffect(() => {
     const container = document.querySelector('.snap-container')
     if (!container) return
@@ -76,18 +76,30 @@ const App = () => {
     let currentIndex = 0
     let isLocked = false
     let touchStartY = 0
-    const duration = 450
+    const duration = 800 // Increased for smoother feel
 
     const scrollToIndex = (idx) => {
       if (!sections[idx]) return
       isLocked = true
+      
+      // Add transition classes
+      sections.forEach((section, i) => {
+        if (i === idx) {
+          section.classList.add('section-in')
+          section.classList.remove('section-out')
+        } else if (i === currentIndex) {
+          section.classList.add('section-out')
+          section.classList.remove('section-in')
+        }
+      })
+      
       currentIndex = idx
       sections[idx].scrollIntoView({ behavior: 'smooth', block: 'start' })
-      window.setTimeout(() => { isLocked = false }, duration + 50)
+      window.setTimeout(() => { isLocked = false }, duration + 100)
     }
 
     const handleWheel = (e) => {
-      if (Math.abs(e.deltaY) < 30) return
+      if (Math.abs(e.deltaY) < 25) return
       e.preventDefault()
       if (isLocked) return
       const direction = e.deltaY > 0 ? 1 : -1

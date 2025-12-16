@@ -14,9 +14,7 @@ const ProductsSection = () => {
             subtitle: "Premium eye care solutions",
             description: "Clinically engineered eye drops for soothing hydration, clarity, and all-day protection.",
             image: "/images/moxel.png",
-            bgImage: "/images/blue-bg.svg",
-            elements: "/images/blue-elements.webp",
-                gradient: "from-blue-500/85 via-sky-600/80 to-indigo-800/85"
+            gradient: "from-[#ff9933]/40 via-[#ffffff]/40 to-[#138808]/40"
         },
         {
             id: 2,
@@ -24,9 +22,7 @@ const ProductsSection = () => {
             subtitle: "Safe and effective ear hygiene",
             description: "Doctor-trusted formulations for wax removal, comfort, and infection prevention.",
             image: "/images/olpat.png",
-            bgImage: "/images/orange-bg.svg",
-            elements: "/images/orange-elements.webp",
-                gradient: "from-amber-500/85 via-orange-600/80 to-rose-800/85"
+            gradient: "from-[#ff9933]/40 via-[#ffffff]/40 to-[#138808]/40"
         },
         {
             id: 3,
@@ -34,9 +30,7 @@ const ProductsSection = () => {
             subtitle: "Rapid healing and protection",
             description: "Advanced antiseptic blends for faster recovery and scar reduction, designed for sensitive skin.",
             image: "/images/tobran.png",
-            bgImage: "/images/brown-bg.svg",
-            elements: "/images/brown-elements.webp",
-                gradient: "from-whte-500/85 via-green-600/80 to-white-800/85"
+            gradient: "from-[#ff9933]/40 via-[#ffffff]/40 to-[#138808]/40"
         },
         {
             id: 4,
@@ -44,9 +38,7 @@ const ProductsSection = () => {
             subtitle: "Clear, gentle breathing",
             description: "Saline-powered nasal care that keeps airways clear, balanced, and comfortable.",
             image: "/images/moxel.png",
-            bgImage: "/images/red-bg.svg",
-            elements: "/images/red-elements.webp",
-                gradient: "from-rose-500/85 via-pink-600/80 to-purple-800/85"
+            gradient: "from-[#ff9933]/40 via-[#ffffff]/40 to-[#138808]/40"
         }
     ]
 
@@ -105,7 +97,7 @@ const ProductsSection = () => {
     return (
         <section
             id="products"
-            className="relative min-h-screen overflow-hidden bg-slate-900 snap-start section-blend"
+            className="relative min-h-screen overflow-hidden bg-white snap-start section-blend"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
             onWheel={handleWheel}
@@ -123,30 +115,19 @@ const ProductsSection = () => {
                 >
                     <div className="absolute inset-0">
                         <div className={`absolute inset-0 bg-gradient-to-br ${slides[currentSlide].gradient}`} />
-                        <motion.img
-                            initial={{ scale: 1.08 }}
-                            animate={{ scale: 1 }}
-                            transition={{ duration: 6, ease: "easeOut" }}
-                            src={slides[currentSlide].bgImage}
-                            alt="Background"
-                            className="w-full h-full object-cover opacity-15"
-                        />
-                        <motion.img
-                            initial={{ opacity: 0, x: -100 }}
-                            animate={{ opacity: 0.35, x: 0 }}
-                            transition={{ duration: 1.2, ease: "easeOut" }}
-                            src={slides[currentSlide].elements}
-                            alt="Decor"
-                            className="absolute left-0 top-0 h-full object-contain"
-                        />
                     </div>
 
                     <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-18 lg:py-20">
                         <div className="flex flex-col gap-12 lg:gap-14">
                             <div className="flex justify-center">
-                                <div className="inline-flex items-center gap-2 px-5 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-sm font-semibold text-white shadow-lg shadow-black/10">
-                                    Our Medical Product Range
-                                </div>
+                                <motion.div
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.7 }}
+                                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-white/98 backdrop-blur-2xl border border-slate-200/60 rounded-full text-xs font-bold text-slate-900 shadow-lg shadow-slate-900/10 hover:shadow-xl hover:scale-105 transition-all duration-300"
+                                >
+                                    <span className="bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] bg-clip-text text-transparent">Our Medical Product Range</span>
+                                </motion.div>
                             </div>
 
                             <div className="grid lg:grid-cols-2 gap-12 xl:gap-16 items-center">
@@ -154,36 +135,52 @@ const ProductsSection = () => {
                                     initial={{ opacity: 0, y: 40 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.8, delay: 0.25 }}
-                                    className="space-y-6 text-white max-w-2xl lg:pr-6"
+                                    className="space-y-6 max-w-2xl lg:pr-6"
                                 >
-                                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-sm font-semibold">
-                                        {slides[currentSlide].subtitle}
-                                    </div>
-                                    <h3 className="text-3xl md:text-4xl font-bold leading-tight">
+                                    <motion.div
+                                        initial={{ opacity: 0, scale: 0.9 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        transition={{ duration: 0.6, delay: 0.3 }}
+                                        className="inline-flex items-center gap-2 px-4 py-2 bg-white/98 backdrop-blur-2xl border border-slate-200/60 rounded-full text-xs font-bold shadow-md shadow-slate-900/10"
+                                    >
+                                        <span className="bg-gradient-to-r from-[#ff9933] to-[#138808] bg-clip-text text-transparent">{slides[currentSlide].subtitle}</span>
+                                    </motion.div>
+                                    <h3 className="text-3xl md:text-4xl xl:text-5xl font-black leading-tight text-slate-950 tracking-tight" style={{
+                                        textShadow: '0 2px 20px rgba(255, 255, 255, 0.4), 0 1px 3px rgba(0, 0, 0, 0.1)'
+                                    }}>
                                         {slides[currentSlide].title}
                                     </h3>
-                                    <p className="text-lg text-white/85 max-w-2xl leading-relaxed">
+                                    <p className="text-base md:text-lg text-slate-600 max-w-2xl leading-relaxed font-medium">
                                         {slides[currentSlide].description}
                                     </p>
-                                    <div className="flex flex-wrap gap-3 pt-2">
-                                        {["FDA Approved", "Clinically Tested", "Patient Preferred"].map((item) => (
-                                            <span key={item} className="px-4 py-2 rounded-full bg-white/10 border border-white/20 text-sm font-medium backdrop-blur-sm">
+                                    <div className="flex flex-wrap gap-2.5 pt-2">
+                                        {["FDA Approved", "Clinically Tested", "Patient Preferred"].map((item, idx) => (
+                                            <motion.span
+                                                key={item}
+                                                initial={{ opacity: 0, scale: 0.8 }}
+                                                animate={{ opacity: 1, scale: 1 }}
+                                                transition={{ duration: 0.5, delay: 0.5 + idx * 0.1 }}
+                                                className="px-4 py-2 rounded-full bg-white/98 border border-slate-200/60 text-xs font-bold shadow-md shadow-slate-900/10 text-slate-900 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-default backdrop-blur-sm"
+                                            >
                                                 {item}
-                                            </span>
+                                            </motion.span>
                                         ))}
                                     </div>
                                     <div className="flex flex-col sm:flex-row gap-4 pt-4">
                                         <button
                                             onClick={() => window.location.assign('/catalogue')}
-                                            className="group px-7 py-3 rounded-full bg-white text-slate-900 font-semibold text-base flex items-center gap-2 shadow-xl hover:-translate-y-1 hover:shadow-2xl transition"
+                                            className="btn-primary group"
                                         >
-                                            View Details
-                                            <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                            <span>View Details</span>
+                                            <svg className="w-5 h-5 transition-transform group-hover:translate-x-1 duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                             </svg>
                                         </button>
-                                        <button className="px-7 py-3 rounded-full border border-white/25 bg-white/10 text-white font-semibold text-base backdrop-blur-md hover:bg-white/15 hover:-translate-y-1 transition">
-                                            Download Catalog
+                                        <button className="btn-secondary group">
+                                            <span>Download Catalog</span>
+                                            <svg className="w-5 h-5 transition-transform group-hover:translate-x-1 duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                                            </svg>
                                         </button>
                                     </div>
                                 </motion.div>

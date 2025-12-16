@@ -143,7 +143,7 @@ const BenefitsSection = () => {
         <section
             id="benefits"
             ref={sectionRef}
-            className="section bg-gradient-to-br from-gray-50 to-blue-50 snap-start"
+            className="section snap-start bg-white"
         >
             <div className="container-custom w-full">
                 {/* Section Header */}

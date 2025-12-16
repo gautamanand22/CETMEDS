@@ -46,7 +46,14 @@ const ProductCard = ({ product, index }) => {
 
                                 <div className="flex flex-wrap gap-3 pt-3">
                                     <button
-                                        onClick={() => window.location.assign('/catalogue')}
+                                        onClick={() => {
+                                            // Use hash routing for GitHub Pages compatibility
+                                            if (window.location.hostname === 'cetmeds.com' || window.location.hostname.includes('github.io')) {
+                                                window.location.assign('/?/catalogue')
+                                            } else {
+                                                window.location.assign('/catalogue')
+                                            }
+                                        }}
                                         className="px-6 py-2.5 bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] text-white font-bold text-xs rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2"
                                     >
                                         <span>View Details</span>

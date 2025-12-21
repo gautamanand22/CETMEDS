@@ -199,18 +199,18 @@ const HeroSection = () => {
                                     className="flex flex-wrap gap-8 pt-4 items-center"
                                 >
                                     <div className="group">
-                                        <div className="text-3xl font-black bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] bg-clip-text text-transparent">25+</div>
+                                        <div className="text-3xl font-black bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] bg-clip-text text-transparent">15+</div>
                                         <div className="text-xs text-slate-600 font-semibold mt-1">Years Excellence</div>
                                     </div>
                                     <div className="h-10 w-px bg-gradient-to-b from-transparent via-slate-300 to-transparent" />
                                     <div className="group">
-                                        <div className="text-3xl font-black bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] bg-clip-text text-transparent">50K+</div>
-                                        <div className="text-xs text-slate-600 font-semibold mt-1">Patients Served</div>
+                                        <div className="text-3xl font-black bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] bg-clip-text text-transparent">20K+</div>
+                                        <div className="text-xs text-slate-600 font-semibold mt-1">Wholesalers Served</div>
                                     </div>
                                     <div className="h-10 w-px bg-gradient-to-b from-transparent via-slate-300 to-transparent" />
                                     <div className="group">
-                                        <div className="text-3xl font-black bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] bg-clip-text text-transparent">120+</div>
-                                        <div className="text-xs text-slate-600 font-semibold mt-1">Healthcare Partners</div>
+                                        <div className="text-3xl font-black bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] bg-clip-text text-transparent">1 M+</div>
+                                        <div className="text-xs text-slate-600 font-semibold mt-1">Clients Satisfaction</div>
                                     </div>
                                 </motion.div>
                             </div>

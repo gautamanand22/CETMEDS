@@ -1,0 +1,31 @@
+/* src/sections/ScrollStack.css */
+
+.scroll-stack-scroller {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scroll-stack-inner {
+  /* Remove heavy padding that breaks full-screen layout */
+  padding: 0;
+  /* Add space only at the bottom for the last card to unpin */
+  padding-bottom: 100vh;
+}
+
+.scroll-stack-card {
+  /* Remove all default styling that conflicts with full-screen cards */
+  transform-origin: top center;
+  will-change: transform, filter;
+  backface-visibility: hidden;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+.scroll-stack-end {
+  width: 100%;
+  height: 1px;
+}

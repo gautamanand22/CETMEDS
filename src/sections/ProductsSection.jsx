@@ -1,216 +1,201 @@
-import React, { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import React, { useRef, useLayoutEffect } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { motion } from 'framer-motion'
 
-const ProductCard = ({ product, index }) => {
+gsap.registerPlugin(ScrollTrigger)
+
+const products = [
+    {
+        id: 1,
+        title: "XYLONA",
+        category: "Eye Care",
+        subtitle: "In nasal congestion, make breathing easy",
+        description: "Clinically engineered eye drops for soothing hydration, clarity, and all-day protection. Preservative-free formula trusted by ophthalmologists worldwide.",
+        features: ["Gives relief within minutes & lasts upto 10 hrs1", "No rebound swelling recorded after 10 days of using Xylometazoline2", "Does not show signs of rebound swelling", "Provides fast & long-lasting relief"],
+        image: "/images/xylona.png",
+        gradient: "from-blue-50 via-cyan-50 to-teal-50",
+        color: "from-blue-500 to-cyan-500",
+        accentColor: "#3b82f6"
+    },
+    {
+        id: 2,
+        title: "Vital-O",
+        category: "Eye Care",
+        subtitle: "In Macular Degeneration & Diabetic Retinopathy",
+        description: "Vital-O offers the convenience of a small size soft gelatin capsule for Increased bio-availability Ease of Swallowing",
+        features: ["Lutein (3.2 mg.)", "Zeaxanthin (256 mcg)", "L-glutathione (5 mg)", "Beta-carotene (6000 I.U.)", "Zinc, Copper, Maganese & Selenium"],
+        image: "/images/olpat.png",
+        gradient: "from-purple-50 via-pink-50 to-rose-50",
+        color: "from-purple-500 to-pink-500",
+        accentColor: "#a855f7"
+    },
+    {
+        id: 3,
+        title: "ROTOWAX",
+        category: "Ear Care",
+        subtitle: "To remove hard impacted wax",
+        description: "(Paradichlorobenze,Benzocain, Chlorbutol&T urpentineOil)EarDrop. The impacted wax softener to remove excessimpacted wax",
+        features: ["Benzocaine- For local pain relief", "Tuprentine Oil - For lubrication", "Paradichlorobenzene - For softening &dispering impactedwax", "Chlorbutol - For anti-bacterial &Anti-fungalactivity"],
+        image: "/images/rotowax.png",
+        gradient: "from-emerald-50 via-green-50 to-lime-50",
+        color: "from-emerald-500 to-green-500",
+        accentColor: "#10b981"
+    },
+    {
+        id: 4,
+        title: "OFF TEAR",
+        category: "Eye Care",
+        subtitle: "To retain & provide the required lubrication. The better way to wet eyes dry",
+        description: "The better way to wet eyes dry",
+        features: ["Carboxymethylcellulose in OFF TEAR. Mimicsthe mucinlayer in natural tears1", "Providesbetter lubrication, protection & clinical efficacyfor longer period unlike other polymers2", "Provides better lubrication, protection & clinical efficacy for longer period unlike other polymers2", "In dryness associated with Contact lens wear Old age CVS Post LASIK"],
+        image: "/images/offtearplus.png",
+        gradient: "from-orange-50 via-amber-50 to-yellow-50",
+        color: "from-orange-500 to-amber-500",
+        accentColor: "#f97316"
+    }
+]
+
+const ProductCard = ({ product }) => {
     return (
-        <motion.div
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -100 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="w-full h-full"
-        >
-            <div className="w-full h-full bg-gradient-to-br from-white/95 via-white/90 to-white/85 backdrop-blur-xl overflow-hidden">
-                <div className={`relative h-full overflow-hidden bg-gradient-to-br ${product.gradient} backdrop-blur-xl`}>
-                    <div className="grid lg:grid-cols-2 gap-6 p-6 lg:p-8 items-center h-full max-w-7xl mx-auto">
-                            <div className="space-y-3">
-                                <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/95 backdrop-blur-sm border border-slate-200 rounded-full shadow-lg">
-                                    <div className={`w-2 h-2 rounded-full bg-gradient-to-r ${product.color}`} />
-                                    <span className="text-[10px] font-bold text-slate-900 uppercase tracking-wider">{product.category}</span>
-                                </div>
+        <div className="w-full h-full">
+            <div 
+                className={`w-full h-full bg-gradient-to-br ${product.gradient} relative`}
+            >
+                <div className="grid lg:grid-cols-2 gap-8 p-8 lg:p-12 items-center h-full max-w-[1920px] mx-auto">
+                    <div className="space-y-6 relative z-10">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm border border-slate-200 rounded-full shadow-lg">
+                            <div className="w-2 h-2 rounded-full" style={{ background: product.accentColor }} />
+                            <span className="text-xs font-bold text-slate-900 uppercase tracking-wider">{product.category}</span>
+                        </div>
 
-                                <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-slate-900 leading-tight tracking-tight">
-                                    {product.title}
-                                </h3>
+                        <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 leading-tight tracking-tight">
+                            {product.title}
+                        </h3>
 
-                                <p className="text-base md:text-lg font-bold bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] bg-clip-text text-transparent">
-                                    {product.subtitle}
-                                </p>
+                        <p className="text-lg md:text-xl font-bold bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] bg-clip-text text-transparent">
+                            {product.subtitle}
+                        </p>
 
-                                <p className="text-sm md:text-base text-slate-700 leading-relaxed">
-                                    {product.description}
-                                </p>
+                        <p className="text-base md:text-lg text-slate-700 leading-relaxed">
+                            {product.description}
+                        </p>
 
-                                <div className="grid grid-cols-2 gap-2 pt-2">
-                                    {product.features.map((feature, idx) => (
-                                        <div key={idx} className="flex items-center gap-2 text-xs text-slate-800">
-                                            <div className="w-4 h-4 rounded-full bg-gradient-to-r from-[#138808] to-[#2563eb] flex items-center justify-center flex-shrink-0">
-                                                <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                                                </svg>
-                                            </div>
-                                            <span className="font-semibold">{feature}</span>
-                                        </div>
-                                    ))}
-                                </div>
-
-                                <div className="flex flex-wrap gap-3 pt-3">
-                                    <button
-                                        onClick={() => {
-                                            // Use hash routing for GitHub Pages compatibility
-                                            if (window.location.hostname === 'cetmeds.com' || window.location.hostname.includes('github.io')) {
-                                                window.location.assign('/?/catalogue')
-                                            } else {
-                                                window.location.assign('/catalogue')
-                                            }
-                                        }}
-                                        className="px-6 py-2.5 bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] text-white font-bold text-xs rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2"
-                                    >
-                                        <span>View Details</span>
-                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
-                                            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        <div className="grid grid-cols-2 gap-3 pt-4">
+                            {product.features.map((feature, idx) => (
+                                <div key={idx} className="flex items-center gap-2 text-sm text-slate-800">
+                                    <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: `linear-gradient(135deg, ${product.accentColor}, #138808)` }}>
+                                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                                         </svg>
-                                    </button>
-                                    <button className="px-6 py-2.5 bg-white/90 backdrop-blur-xl border border-slate-200 text-slate-900 font-bold text-xs rounded-full hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg">
-                                        Request Sample
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div className="relative h-full flex items-center justify-center">
-                                <div className="relative w-full aspect-[3/4] max-h-[500px]">
-                                    <div className={`absolute -inset-8 bg-gradient-to-br ${product.color} rounded-3xl blur-3xl opacity-30 animate-pulse`} />
-                                    <div className="relative h-full bg-gradient-to-br from-white/90 via-white/80 to-white/70 backdrop-blur-2xl border border-white/50 rounded-3xl shadow-2xl p-6 overflow-hidden">
-                                        <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${product.color} rounded-full blur-3xl opacity-20`} />
-                                        <div className={`absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr ${product.color} rounded-full blur-2xl opacity-20`} />
-                                        <img 
-                                            src={product.image}
-                                            alt={product.title}
-                                            className="relative w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.2)]"
-                                        />
-                                        <div className="absolute top-4 left-4 px-3 py-1.5 bg-white/95 backdrop-blur-sm rounded-full border border-white/40 shadow-lg">
-                                            <span className="text-[10px] font-bold bg-gradient-to-r from-[#ff9933] to-[#138808] bg-clip-text text-transparent">Premium Quality</span>
-                                        </div>
-                                        <div className="absolute bottom-4 right-4 px-3 py-1.5 bg-white/95 backdrop-blur-sm rounded-full border border-white/40 shadow-lg">
-                                            <span className="text-[10px] font-bold text-slate-900">FDA Approved</span>
-                                        </div>
                                     </div>
+                                    <span className="font-semibold">{feature}</span>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="flex flex-wrap gap-4 pt-6">
+                            <button
+                                onClick={() => {
+                                    if (window.location.hostname === 'cetmeds.com' || window.location.hostname.includes('github.io')) {
+                                        window.location.assign('/?/catalogue')
+                                    } else {
+                                        window.location.assign('/catalogue')
+                                    }
+                                }}
+                                className="px-8 py-3 bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] text-white font-bold text-sm rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2"
+                            >
+                                <span>View Details</span>
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </button>
+                            <button className="px-8 py-3 bg-white/90 backdrop-blur-xl border-2 border-slate-300 text-slate-900 font-bold text-sm rounded-full hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg">
+                                Request Sample
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="relative h-full flex items-center justify-center">
+                        <div className="relative w-full aspect-square max-h-[500px] mx-auto">
+                            <div className="absolute -inset-12 rounded-full blur-3xl opacity-30 animate-pulse" style={{ background: `linear-gradient(135deg, ${product.accentColor}, #138808)` }} />
+
+                            <div className="relative h-full bg-white/80 backdrop-blur-2xl border-2 border-white/60 rounded-3xl shadow-2xl p-8 overflow-hidden flex items-center justify-center">
+                                <div className="absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl opacity-20" style={{ background: `linear-gradient(135deg, ${product.accentColor}, transparent)` }} />
+                                <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full blur-2xl opacity-20" style={{ background: `linear-gradient(225deg, ${product.accentColor}, transparent)` }} />
+
+                                <img src={product.image} alt={product.title} className="relative w-full h-full object-contain drop-shadow-2xl" />
+
+                                <div className="absolute top-4 left-4 px-3 py-1.5 bg-white/95 backdrop-blur-sm rounded-full border border-white/40 shadow-lg">
+                                    <span className="text-xs font-bold bg-gradient-to-r from-[#ff9933] to-[#138808] bg-clip-text text-transparent">Premium Quality</span>
+                                </div>
+                                <div className="absolute bottom-4 right-4 px-3 py-1.5 bg-white/95 backdrop-blur-sm rounded-full border border-white/40 shadow-lg">
+                                    <span className="text-xs font-bold text-slate-900">FDA Approved</span>
                                 </div>
                             </div>
                         </div>
-
-                    <div className="absolute top-6 right-6 w-14 h-14 rounded-full bg-white/95 backdrop-blur-sm border-2 border-slate-200 shadow-lg flex items-center justify-center">
-                        <span className="text-xl font-black bg-gradient-to-r from-[#ff9933] to-[#138808] bg-clip-text text-transparent">
-                            {String(index + 1).padStart(2, '0')}
-                        </span>
                     </div>
                 </div>
             </div>
-        </motion.div>
+        </div>
     )
 }
 
 const ProductsSection = () => {
-    const [currentIndex, setCurrentIndex] = useState(0)
+    const containerRef = useRef(null)
+    const cardsRef = useRef([])
 
-    const products = [
-        {
-            id: 1,
-            title: "OpticClear Professional",
-            category: "Eye Care",
-            subtitle: "Premium eye care solutions",
-            description: "Clinically engineered eye drops for soothing hydration, clarity, and all-day protection. Preservative-free formula trusted by ophthalmologists worldwide.",
-            features: ["Preservative-free", "Fast-acting relief", "Doctor recommended", "Long-lasting hydration"],
-            image: "/images/moxel.png",
-            gradient: "from-blue-50/90 via-cyan-50/80 to-teal-50/70",
-            color: "from-blue-500 to-cyan-500"
-        },
-        {
-            id: 2,
-            title: "EarGuard Advanced",
-            category: "Ear Care",
-            subtitle: "Safe and effective ear hygiene",
-            description: "Doctor-trusted formulations for wax removal, comfort, and infection prevention. Gentle yet effective solution for complete ear health.",
-            features: ["Gentle formula", "Pain-free cleansing", "Clinically tested", "Safe for all ages"],
-            image: "/images/olpat.png",
-            gradient: "from-purple-50/90 via-pink-50/80 to-rose-50/70",
-            color: "from-purple-500 to-pink-500"
-        },
-        {
-            id: 3,
-            title: "WoundCare+ Defense",
-            category: "Wound Care",
-            subtitle: "Rapid healing and protection",
-            description: "Advanced antiseptic blends for faster recovery and scar reduction. Specially designed for sensitive skin with powerful healing properties.",
-            features: ["Antiseptic protection", "Scar reduction", "Fast healing", "Skin-friendly"],
-            image: "/images/tobran.png",
-            gradient: "from-emerald-50/90 via-green-50/80 to-lime-50/70",
-            color: "from-emerald-500 to-green-500"
-        },
-        {
-            id: 4,
-            title: "NasalPure Relief",
-            category: "Nasal Care",
-            subtitle: "Clear, gentle breathing",
-            description: "Saline-powered nasal care that keeps airways clear, balanced, and comfortable. Natural relief without dependency or side effects.",
-            features: ["Natural saline", "Non-addictive", "Instant relief", "Moisturizing"],
-            image: "/images/moxel.png",
-            gradient: "from-orange-50/90 via-amber-50/80 to-yellow-50/70",
-            color: "from-orange-500 to-amber-500"
-        }
-    ]
+    useLayoutEffect(() => {
+        const ctx = gsap.context(() => {
+            const cards = cardsRef.current
+            const totalScroll = (cards.length - 1) * 100 // Total scroll distance in percentage
 
-    // Auto-rotate every 5 seconds
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setCurrentIndex((prev) => (prev + 1) % products.length)
-        }, 5000)
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    trigger: containerRef.current,
+                    start: "top top",
+                    end: `+=${totalScroll}%`,
+                    pin: true,
+                    scrub: 1,
+                }
+            })
 
-        return () => clearInterval(interval)
-    }, [products.length])
+            cards.forEach((card, index) => {
+                if (index === 0) return
+                
+                tl.fromTo(card, 
+                    { yPercent: 100 },
+                    { yPercent: 0, ease: "none" }
+                )
+            })
+        }, containerRef)
+
+        return () => ctx.revert()
+    }, [])
 
     return (
-        <section id="products" className="relative h-screen bg-gradient-to-br from-slate-50 via-white to-blue-50/30 pt-24 px-6 pb-6 flex flex-col">
-            {/* Featured Products Header */}
-            <div className="text-center mb-6">
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-950 leading-tight tracking-tight">
+        <section id="products" className="relative bg-gray-50">
+            <div className="relative z-10 pt-20 pb-8 text-center bg-gray-50/95 backdrop-blur-sm">
+                <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-950 leading-tight tracking-tight">
                     Featured <span className="bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] bg-clip-text text-transparent">Products</span>
                 </h2>
+                <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto px-4">
+                    Discover our range of clinically proven healthcare solutions
+                </p>
             </div>
 
-            {/* Full Width Cards Container */}
-            <div className="relative flex-1 w-full overflow-hidden rounded-2xl shadow-2xl">
-                <AnimatePresence mode="wait">
-                    <ProductCard 
-                        key={currentIndex} 
-                        product={products[currentIndex]} 
-                        index={currentIndex}
-                    />
-                </AnimatePresence>
-
-                    {/* Navigation Dots */}
-                    <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-50">
-                        {products.map((_, index) => (
-                            <button
-                                key={index}
-                                onClick={() => setCurrentIndex(index)}
-                                className={`transition-all duration-300 rounded-full ${
-                                    index === currentIndex 
-                                        ? 'w-12 h-3 bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808]' 
-                                        : 'w-3 h-3 bg-white/40 hover:bg-white/60'
-                                }`}
-                            />
-                        ))}
+            <div ref={containerRef} className="h-screen w-full relative overflow-hidden">
+                {products.map((product, index) => (
+                    <div 
+                        key={product.id}
+                        ref={el => cardsRef.current[index] = el}
+                        className="absolute top-0 left-0 w-full h-full will-change-transform"
+                        style={{ zIndex: index + 1 }}
+                    >
+                        <ProductCard product={product} />
                     </div>
-
-                    {/* Navigation Arrows */}
-                    <button
-                        onClick={() => setCurrentIndex((prev) => (prev - 1 + products.length) % products.length)}
-                        className="absolute left-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/90 backdrop-blur-sm border border-slate-200 shadow-lg hover:scale-110 transition-transform flex items-center justify-center z-50"
-                    >
-                        <svg className="w-6 h-6 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-                    <button
-                        onClick={() => setCurrentIndex((prev) => (prev + 1) % products.length)}
-                        className="absolute right-6 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-white/90 backdrop-blur-sm border border-slate-200 shadow-lg hover:scale-110 transition-transform flex items-center justify-center z-50"
-                    >
-                        <svg className="w-6 h-6 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
-                </div>
+                ))}
+            </div>
         </section>
     )
 }

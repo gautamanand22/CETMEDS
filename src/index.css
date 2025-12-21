@@ -32,14 +32,12 @@ body {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   line-height: 1.65;
   color: #0f172a;
-  background: linear-gradient(135deg, 
-    #ff9933 0%, 
-    #ffffff 40%, 
-    #ffffff 60%, 
-    #138808 100%);
-  background-size: 300% 300%;
+  background: linear-gradient(180deg, 
+    rgba(255, 153, 51, 0.03) 0%,
+    rgba(255, 255, 255, 1) 15%,
+    rgba(255, 255, 255, 1) 85%,
+    rgba(19, 136, 8, 0.03) 100%);
   background-attachment: fixed;
-  animation: tricolorFlow 20s ease infinite;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -49,101 +47,38 @@ body {
   letter-spacing: -0.011em;
 }
 
-@keyframes tricolorFlow {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-/* Scroll snap for swipe-like page flow with ultra-smooth transitions */
-.snap-container {
+/* Smooth scrolling container */
+.main-container {
   position: relative;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-  height: 100vh;
-  overflow-y: auto;
-  scroll-padding-top: 0;
-  scroll-snap-stop: always;
-  overscroll-behavior: none;
-  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  overflow-x: hidden;
   background: transparent;
 }
 
-/* Tricolor gradient overlay for sections */
-.snap-container::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(180deg,
-    rgba(255, 153, 51, 0.06) 0%,
-    rgba(255, 255, 255, 0.02) 20%,
-    rgba(255, 255, 255, 0) 50%,
-    rgba(255, 255, 255, 0.02) 80%,
-    rgba(19, 136, 8, 0.06) 100%);
-  z-index: 1;
-  opacity: 0.7;
-  animation: tricolorShift 25s ease-in-out infinite;
-}
-
-@keyframes tricolorShift {
-  0%, 100% {
-    opacity: 0.6;
-    transform: translateY(0);
-  }
-  50% {
-    opacity: 0.4;
-    transform: translateY(-20px);
-  }
-}
-
-.snap-container > section {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
+/* Unified continuous sections */
+.main-container > section {
   position: relative;
+  width: 100%;
   background: transparent;
   z-index: 2;
 }
 
-/* Special handling for stacking cards section */
-.snap-container > section.stacking-section {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  /* Create internal scroll container for cards */
-  position: relative;
-  min-height: 100vh;
-}
-
-/* Tricolor accent for sections */
-.snap-container > section::before {
+/* Subtle section divider */
+.main-container > section::after {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 1px;
   background: linear-gradient(90deg, 
-    #ff9933 0%, 
-    #ffffff 25%,
-    #2563eb 50%,
-    #ffffff 75%, 
-    #138808 100%);
-  background-size: 300% 100%;
-  animation: tricolorSlide 12s linear infinite;
-  z-index: 10;
-  opacity: 0.8;
-}
-
-@keyframes tricolorSlide {
-  0% {
-    background-position: 0% 0%;
-  }
-  100% {
-    background-position: 200% 0%;
-  }
+    transparent 0%,
+    rgba(255, 153, 51, 0.1) 20%,
+    rgba(37, 99, 235, 0.15) 50%,
+    rgba(19, 136, 8, 0.1) 80%,
+    transparent 100%);
+  opacity: 0.5;
 }
 
 .section-blend {
@@ -185,15 +120,31 @@ section {
   min-height: 100vh;
   width: 100%;
   position: relative;
-  padding: 60px 0;
+  padding: 80px 0;
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
 /* Special spacing for first section */
 #home {
   padding-top: 0;
+  min-height: 100vh;
 }
 
-/* Remove default gaps between sections to keep snap flush */
+/* Scroll-triggered animations */
+section.fade-in {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+section.fade-in.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Parallax effect for certain sections */
+.parallax-section {
+  transform-style: preserve-3d;
+}
 
 .container-custom {
   max-width: 1200px;
@@ -741,4 +692,129 @@ html {
   50% {
     background-position: 100% 50%;
   }
+}
+
+/* Stacking cards animation */
+.stack-card {
+  position: sticky;
+  top: 100px;
+  transform-origin: center top;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stack-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Smooth entrance animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+.animate-fade-in-scale {
+  animation: fadeInScale 0.6s ease-out forwards;
+}
+
+/* Lenis smooth scrolling */
+html.lenis {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* Product card hover effects */
+.product-card-hover {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.product-card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
+}
+
+/* Product Feature Cards in ScrollStack */
+.product-feature-card {
+  min-height: 75vh !important;
+  max-height: 80vh !important;
+  height: auto !important;
+  padding: 0 !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15) !important;
+}
+
+.products-scroll-stack {
+  position: absolute !important;
+  inset: 0 !important;
+  height: 100% !important;
+}
+
+.products-scroll-stack .scroll-stack-inner {
+  padding-top: 18vh !important;
+  padding-bottom: 50vh !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+}
+
+.products-scroll-stack .scroll-stack-scroller {
+  height: 100% !important;
+  overflow-y: auto !important;
+  overflow-x: visible !important;
+}
+
+.products-scroll-stack .scroll-stack-card {
+  margin-bottom: 0 !important;
+}
+
+/* Improved scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #ff9933, #2563eb, #138808);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #ff9933, #138808);
 }

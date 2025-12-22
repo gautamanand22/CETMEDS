@@ -11,6 +11,7 @@ import AboutSection from './sections/AboutSection'
 import ProductsSection from './sections/ProductsSection'
 import DoctorsSection from './sections/DoctorsSection'
 import TestimonialsShowcase from './sections/TestimonialsShowcase'
+import ContactSection from './sections/ContactSection'
 import Footer from './components/Footer'
 
 // Components
@@ -152,6 +153,7 @@ const App = () => {
         <ProductsSection />
         <DoctorsSection />
         <TestimonialsShowcase />
+        <ContactSection />
       </main>
 
       <div className="relative z-10">

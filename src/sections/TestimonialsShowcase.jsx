@@ -118,7 +118,8 @@ const TestimonialCard = ({ item }) => (
 
 const TestimonialsShowcase = () => {
     return (
-        <section id="testimonials-highlight" className="relative min-h-screen section-blend overflow-hidden snap-start bg-white">
+        <section id="testimonials-highlight" className="relative min-h-screen section-blend overflow-hidden snap-start bg-transparent">
+            <div className="absolute inset-0 bg-white/40 backdrop-blur-sm -z-10" />
 
             <div className="relative w-full max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-14 py-14 lg:py-16">
                 <div className="text-center space-y-3 max-w-4xl mx-auto">

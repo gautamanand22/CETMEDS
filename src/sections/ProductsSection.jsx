@@ -174,8 +174,8 @@ const ProductsSection = () => {
     }, [])
 
     return (
-        <section id="products" className="relative bg-gray-50">
-            <div className="relative z-10 pt-20 pb-8 text-center bg-gray-50/95 backdrop-blur-sm">
+        <section id="products" className="relative bg-transparent">
+            <div className="relative z-10 pt-20 pb-8 text-center bg-white/40 backdrop-blur-sm">
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-950 leading-tight tracking-tight">
                     Featured <span className="bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] bg-clip-text text-transparent">Products</span>
                 </h2>

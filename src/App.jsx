@@ -22,6 +22,7 @@ gsap.registerPlugin(ScrollTrigger)
 
 const App = () => {
   const lenisRef = useRef(null)
+  const bgRef = useRef(null)
 
   // Initialize Lenis smooth scrolling
   useEffect(() => {
@@ -51,6 +52,22 @@ const App = () => {
 
     return () => {
       lenis.destroy()
+    }
+  }, [])
+
+  // Background Parallax Animation
+  useEffect(() => {
+    if (bgRef.current) {
+      gsap.to(bgRef.current, {
+        yPercent: 20, // Move background down slightly as we scroll down
+        ease: "none",
+        scrollTrigger: {
+          trigger: document.body,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: true
+        }
+      })
     }
   }, [])
 
@@ -103,7 +120,25 @@ const App = () => {
   }, [])
 
   return (
-    <div className="relative bg-white">
+    <div className="relative min-h-screen bg-slate-50">
+      {/* Fixed Global Background */}
+      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Tricolor Gradient Base */}
+        <div 
+          ref={bgRef}
+          className="absolute -inset-[20%] w-[140%] h-[140%] bg-gradient-to-br from-[#ff9933]/20 via-white to-[#138808]/20"
+        />
+        
+        {/* Optional: Texture/Noise for professional feel */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ 
+            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' /%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' /%3E%3C/svg%3E")',
+            backgroundSize: '200px 200px'
+        }} />
+        
+        {/* Grid Pattern */}
+        <div className="absolute inset-0 bg-[url('/images/grid.svg')] opacity-[0.05]" />
+      </div>
+
       {/* Navigation */}
       <NavBar />
 
@@ -111,7 +146,7 @@ const App = () => {
       <ScrollProgress />
 
       {/* Main Content - Continuous Smooth Scrolling */}
-      <main className="relative main-container">
+      <main className="relative main-container z-10">
         <HeroSection />
         <AboutSection />
         <ProductsSection />
@@ -119,7 +154,9 @@ const App = () => {
         <TestimonialsShowcase />
       </main>
 
-      <Footer />
+      <div className="relative z-10">
+        <Footer />
+      </div>
     </div>
   )
 }

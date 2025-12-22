@@ -5,19 +5,11 @@ const AboutSection = () => {
     return (
         <section
             id="about"
-            className="relative min-h-screen overflow-hidden section-blend bg-white"
+            className="relative min-h-screen overflow-hidden section-blend bg-transparent"
         >
-            {/* Background Image */}
+            {/* Glass Card Background for readability */}
             <div className="absolute inset-0 z-0">
-                <div 
-                    className="absolute inset-0 bg-cover bg-center opacity-15"
-                    style={{
-                        backgroundImage: 'url("/images/landing eye.jpg")',
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        backgroundRepeat: 'no-repeat'
-                    }}
-                />
+                <div className="absolute inset-0 bg-white/40 backdrop-blur-sm" />
             </div>
 
             <div className="relative z-10 w-full max-w-[1500px] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16 py-12 lg:py-14">

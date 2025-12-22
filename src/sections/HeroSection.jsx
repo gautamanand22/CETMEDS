@@ -73,7 +73,7 @@ const HeroSection = () => {
     return (
         <section
             id="home"
-            className="relative h-screen w-full overflow-hidden bg-white section-blend"
+            className="relative h-screen w-full overflow-hidden bg-transparent section-blend"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
         >
@@ -86,18 +86,7 @@ const HeroSection = () => {
                     transition={{ duration: 1, ease: "easeInOut" }}
                     className="absolute inset-0"
                 >
-                    <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-slate-50">
-                        {/* Subtle tricolor gradient overlay */}
-                        <div className={`absolute inset-0 bg-gradient-to-br ${slides[currentSlide].tone} opacity-35`} style={{ backgroundSize: '120% 120%' }} />
-                        {/* Mesh gradient for depth */}
-                        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,153,51,0.08),transparent_50%),radial-gradient(circle_at_70%_80%,rgba(19,136,8,0.08),transparent_50%)]" />
-                        {/* Subtle noise texture */}
-                        <div className="absolute inset-0 opacity-[0.015]" style={{ 
-                            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' /%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' /%3E%3C/svg%3E")',
-                            backgroundSize: '200px 200px'
-                        }} />
-                    </div>
-
+                    {/* Content Container - No Background here to let Global BG show */}
                     <div className="relative h-full w-full px-6 sm:px-8 lg:px-16 xl:px-20 pt-20 pb-12">
                         <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 xl:gap-16 items-center h-full max-w-[1600px] mx-auto">
                             <div className="space-y-6 max-w-4xl">

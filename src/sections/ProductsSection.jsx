@@ -60,10 +60,13 @@ const ProductCard = ({ product }) => {
     return (
         <div className="w-full h-full">
             <div 
-                className={`w-full h-full bg-gradient-to-br ${product.gradient} relative`}
+                className="w-full h-full relative bg-white"
             >
-                <div className="grid lg:grid-cols-2 gap-8 p-8 lg:p-12 items-center h-full max-w-[1920px] mx-auto">
-                    <div className="space-y-6 relative z-10">
+                {/* Tricolor Gradient Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#ff9933]/10 via-white to-[#138808]/10" />
+                
+                <div className="grid lg:grid-cols-2 gap-8 p-8 lg:p-12 items-center h-full max-w-[1920px] mx-auto relative z-10">
+                    <div className="space-y-6 relative">
                         <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm border border-slate-200 rounded-full shadow-lg">
                             <div className="w-2 h-2 rounded-full" style={{ background: product.accentColor }} />
                             <span className="text-xs font-bold text-slate-900 uppercase tracking-wider">{product.category}</span>
@@ -175,7 +178,7 @@ const ProductsSection = () => {
 
     return (
         <section id="products" className="relative bg-transparent">
-            <div className="relative z-10 pt-20 pb-8 text-center bg-white/40 backdrop-blur-sm">
+            <div className="relative z-10 pt-10 pb-4 text-center">
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-950 leading-tight tracking-tight">
                     Featured <span className="bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] bg-clip-text text-transparent">Products</span>
                 </h2>

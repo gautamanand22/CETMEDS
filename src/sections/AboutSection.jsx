@@ -5,15 +5,11 @@ const AboutSection = () => {
     return (
         <section
             id="about"
-            className="relative min-h-screen overflow-hidden section-blend bg-transparent"
+            className="relative min-h-screen overflow-hidden section-blend bg-transparent flex items-center py-20"
         >
-            {/* Glass Card Background for readability */}
-            <div className="absolute inset-0 z-0">
-                <div className="absolute inset-0 bg-white/40 backdrop-blur-sm" />
-            </div>
-
-            <div className="relative z-10 w-full max-w-[1500px] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16 py-12 lg:py-14">
-                <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 xl:gap-10 items-center">
+            <div className="relative z-10 w-full max-w-[1500px] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
+                <div className="bg-white/60 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-12 lg:p-16 shadow-sm border border-white/50">
+                    <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 xl:gap-10 items-center">
                     <motion.div
                         initial={{ opacity: 0, y: 18 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -106,6 +102,7 @@ const AboutSection = () => {
                             </div>
                         </div>
                     </motion.div>
+                </div>
                 </div>
             </div>
         </section>

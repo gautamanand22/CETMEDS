@@ -9,11 +9,9 @@ import './index.css'
 import HeroSection from './sections/HeroSection'
 import AboutSection from './sections/AboutSection'
 import ProductsSection from './sections/ProductsSection'
+import DoctorsSection from './sections/DoctorsSection'
 import TestimonialsShowcase from './sections/TestimonialsShowcase'
-import ParallaxSection from './sections/ParallaxSection'
-import BenefitsSection from './sections/BenefitsSection'
-import TestimonialsSection from './sections/TestimonialsSection'
-import ContactSection from './sections/ContactSection'
+import Footer from './components/Footer'
 
 // Components
 import NavBar from './components/NavBar'
@@ -117,12 +115,11 @@ const App = () => {
         <HeroSection />
         <AboutSection />
         <ProductsSection />
+        <DoctorsSection />
         <TestimonialsShowcase />
-        <ParallaxSection />
-        <BenefitsSection />
-        <TestimonialsSection />
-        <ContactSection />
       </main>
+
+      <Footer />
     </div>
   )
 }

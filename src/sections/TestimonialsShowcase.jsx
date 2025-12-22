@@ -3,28 +3,84 @@ import { motion } from 'framer-motion'
 
 const testimonials = [
     {
-        name: 'Dr. Anika Rao',
-        role: 'Ophthalmologist, Fortis',
-        text: 'OpticClear delivers consistent clarity for post-op patients. Packaging is intuitive and reduces chair time.',
+        name: 'Dr. A K Rai (Madhubani)',
+        role: 'Ophthalmologist',
+        text: 'Cetmed provides delivers consistent clarity for post-op patients. Packaging is intuitive and reduces chair time.',
         rating: 5,
         image: '/images/blue-drink.webp'
     },
     {
-        name: 'Dr. Miguel Santos',
+        name: 'Dr. B K Jha (Benipur)',
         role: 'ENT Surgeon, Clinica Vida',
         text: 'EarGuard Advanced is now our default for wax management—patients report less irritation and quicker relief.',
         rating: 5,
         image: '/images/orange-drink.webp'
     },
     {
-        name: 'St. Mary Hospital',
+        name: 'Dr. B K Yadav (Simrahi)',
         role: 'Procurement Lead',
         text: 'WoundCare+ Defense gives us reliable outcomes with fewer dressing changes—nursing teams love the workflow fit.',
         rating: 4,
         image: '/images/red-drink.webp'
     },
     {
-        name: 'Dr. Li Wei',
+        name: 'Dr. Raju Bhagat (Madhubani, K S Hospital)',
+        role: 'Cornea Specialist, Hua Care',
+        text: 'Comfort-first drops that stay consistent across batches—patients notice the difference.',
+        rating: 5,
+        image: '/images/white-drink.webp'
+    },
+    {
+        name: 'Dr. R N Singh And Dr. Nitish Kumar(Red cross hospital)',
+        role: 'Cornea Specialist, Hua Care',
+        text: 'Comfort-first drops that stay consistent across batches—patients notice the difference.',
+        rating: 5,
+        image: '/images/white-drink.webp'
+    },
+    {
+        name: 'Dr. Jai Shree (Astha Eye Care, Hajipur)',
+        role: 'Cornea Specialist, Hua Care',
+        text: 'Comfort-first drops that stay consistent across batches—patients notice the difference.',
+        rating: 5,
+        image: '/images/white-drink.webp'
+    },
+    {
+        name: 'Dr. Aniket Kumar (Pragya Netralaya, Hajipur)',
+        role: 'Cornea Specialist, Hua Care',
+        text: 'Comfort-first drops that stay consistent across batches—patients notice the difference.',
+        rating: 5,
+        image: '/images/white-drink.webp'
+    },
+    {
+        name: 'Dr. Anil Kumar (Maa Mundeswari Medical Hall, Bhabhua)',
+        role: 'Cornea Specialist, Hua Care',
+        text: 'Comfort-first drops that stay consistent across batches—patients notice the difference.',
+        rating: 5,
+        image: '/images/white-drink.webp'
+    },
+    {
+        name: 'Dr. Sachin Kumar ANd Aniket patel (Bhabhua, Gandhikust Niwaran)',
+        role: 'Cornea Specialist, Hua Care',
+        text: 'Comfort-first drops that stay consistent across batches—patients notice the difference.',
+        rating: 5,
+        image: '/images/white-drink.webp'
+    },
+    {
+        name: 'Dr. Chandrasekhar (Chainipur)',
+        role: 'Cornea Specialist, Hua Care',
+        text: 'Comfort-first drops that stay consistent across batches—patients notice the difference.',
+        rating: 5,
+        image: '/images/white-drink.webp'
+    },
+    {
+        name: 'Dr. Prem Prakash Sinha (Khagaul, Prakash Chasma Ghar)',
+        role: 'Cornea Specialist, Hua Care',
+        text: 'Comfort-first drops that stay consistent across batches—patients notice the difference.',
+        rating: 5,
+        image: '/images/white-drink.webp'
+    },
+    {
+        name: 'Dr. Pradeep Kumar (Eyecare, Anishabad)',
         role: 'Cornea Specialist, Hua Care',
         text: 'Comfort-first drops that stay consistent across batches—patients notice the difference.',
         rating: 5,

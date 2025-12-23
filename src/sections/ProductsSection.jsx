@@ -65,8 +65,8 @@ const ProductCard = ({ product }) => {
                 {/* Tricolor Gradient Background */}
                 <div className="absolute inset-0 bg-gradient-to-br from-[#ff9933]/10 via-white to-[#138808]/10" />
                 
-                <div className="grid lg:grid-cols-2 gap-8 p-8 lg:p-12 items-center h-full max-w-[1920px] mx-auto relative z-10">
-                    <div className="space-y-6 relative">
+                <div className="grid lg:grid-cols-2 gap-8 p-6 lg:p-12 items-center h-full max-w-[1920px] mx-auto relative z-10">
+                    <div className="space-y-6 relative order-2 lg:order-1">
                         <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm border border-slate-200 rounded-full shadow-lg">
                             <div className="w-2 h-2 rounded-full" style={{ background: product.accentColor }} />
                             <span className="text-xs font-bold text-slate-900 uppercase tracking-wider">{product.category}</span>
@@ -119,8 +119,8 @@ const ProductCard = ({ product }) => {
                         </div>
                     </div>
 
-                    <div className="relative h-full flex items-center justify-center">
-                        <div className="relative w-full aspect-square max-h-[500px] mx-auto">
+                    <div className="relative h-full flex items-center justify-center order-1 lg:order-2">
+                        <div className="relative w-full aspect-square max-h-[300px] sm:max-h-[500px] mx-auto">
                             <div className="absolute -inset-12 rounded-full blur-3xl opacity-30 animate-pulse" style={{ background: `linear-gradient(135deg, ${product.accentColor}, #138808)` }} />
 
                             <div className="relative h-full bg-white/80 backdrop-blur-2xl border-2 border-white/60 rounded-3xl shadow-2xl p-8 overflow-hidden flex items-center justify-center">
@@ -150,27 +150,31 @@ const ProductsSection = () => {
 
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-            const cards = cardsRef.current
-            const totalScroll = (cards.length - 1) * 100 // Total scroll distance in percentage
+            const mm = gsap.matchMedia();
+            
+            mm.add("(min-width: 1024px)", () => {
+                const cards = cardsRef.current
+                const totalScroll = (cards.length - 1) * 100 // Total scroll distance in percentage
 
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: "top top",
-                    end: `+=${totalScroll}%`,
-                    pin: true,
-                    scrub: 1,
-                }
-            })
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: "top top",
+                        end: `+=${totalScroll}%`,
+                        pin: true,
+                        scrub: 1,
+                    }
+                })
 
-            cards.forEach((card, index) => {
-                if (index === 0) return
-                
-                tl.fromTo(card, 
-                    { yPercent: 100 },
-                    { yPercent: 0, ease: "none" }
-                )
-            })
+                cards.forEach((card, index) => {
+                    if (index === 0) return
+                    
+                    tl.fromTo(card, 
+                        { yPercent: 100 },
+                        { yPercent: 0, ease: "none" }
+                    )
+                })
+            });
         }, containerRef)
 
         return () => ctx.revert()
@@ -179,7 +183,7 @@ const ProductsSection = () => {
     return (
         <section id="products" className="relative bg-transparent">
             <div className="relative z-10 pt-10 pb-4 text-center">
-                <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-950 leading-tight tracking-tight">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-950 leading-tight tracking-tight">
                     Featured <span className="bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] bg-clip-text text-transparent">Products</span>
                 </h2>
                 <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto px-4">
@@ -187,12 +191,12 @@ const ProductsSection = () => {
                 </p>
             </div>
 
-            <div ref={containerRef} className="h-screen w-full relative overflow-hidden">
+            <div ref={containerRef} className="lg:h-screen w-full relative lg:overflow-hidden flex flex-col lg:block">
                 {products.map((product, index) => (
                     <div 
                         key={product.id}
                         ref={el => cardsRef.current[index] = el}
-                        className="absolute top-0 left-0 w-full h-full will-change-transform"
+                        className="relative lg:absolute top-0 left-0 w-full min-h-screen lg:h-full will-change-transform"
                         style={{ zIndex: index + 1 }}
                     >
                         <ProductCard product={product} />

@@ -38,7 +38,7 @@ const ContactSection = () => {
                         </svg>
                         Get in Touch
                     </div>
-                    <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">
                         Contact Us & <span className="text-blue-600">Book Bulk Orders</span>
                     </h2>
                     <p className="text-body text-slate-700 max-w-3xl mx-auto text-lg">
@@ -47,7 +47,7 @@ const ContactSection = () => {
                     </p>
                 </div>
 
-                <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 max-w-6xl mx-auto">
                     {/* Contact Form */}
                     <div className="bg-white/80 backdrop-blur-xl rounded-3xl p-8 shadow-xl border border-white/50">
                         <h3 className="heading-tertiary text-slate-900 mb-6">Send us a message</h3>

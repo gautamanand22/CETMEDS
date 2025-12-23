@@ -7,8 +7,8 @@ const AboutSection = () => {
             id="about"
             className="relative min-h-screen overflow-hidden section-blend bg-transparent flex items-center py-20"
         >
-            <div className="relative z-10 w-full max-w-[1500px] mx-auto px-5 sm:px-8 lg:px-12 xl:px-16">
-                <div className="bg-white/60 backdrop-blur-xl rounded-[2.5rem] p-8 md:p-12 lg:p-16 shadow-sm border border-white/50">
+            <div className="relative z-10 w-full max-w-[1500px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16">
+                <div className="bg-white/60 backdrop-blur-xl rounded-3xl sm:rounded-[2.5rem] p-6 sm:p-8 md:p-12 lg:p-16 shadow-sm border border-white/50">
                     <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-8 xl:gap-10 items-center">
                     <motion.div
                         initial={{ opacity: 0, y: 18 }}
@@ -20,7 +20,7 @@ const AboutSection = () => {
                         <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 border border-blue-200 rounded-full text-sm font-semibold shadow-sm text-blue-700">
                             About Cetmeds Opal
                         </div>
-                        <h2 className="text-4xl md:text-5xl font-extrabold leading-tight drop-shadow-[0_10px_32px_rgba(6,182,212,0.25)] text-slate-900">
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight drop-shadow-[0_10px_32px_rgba(6,182,212,0.25)] text-slate-900">
                             Science-led care with a human touch
                         </h2>
                         <p className="text-base md:text-lg text-slate-700 leading-relaxed max-w-4xl">

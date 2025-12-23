@@ -154,7 +154,7 @@ const DoctorsSection = () => {
         <section className="py-12 bg-transparent relative overflow-hidden w-full">
             <div className="w-full px-4 md:px-8 relative z-10">
                 <div className="text-center max-w-3xl mx-auto mb-10">
-                    <h2 className="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">
                         Trusted by Leading <span className="text-blue-600">Medical Professionals</span>
                     </h2>
                     <p className="text-lg text-slate-600 leading-relaxed">

@@ -73,7 +73,7 @@ const HeroSection = () => {
     return (
         <section
             id="home"
-            className="relative h-screen w-full overflow-hidden bg-transparent section-blend"
+            className="relative min-h-screen w-full overflow-hidden bg-transparent section-blend flex flex-col"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
         >
@@ -84,12 +84,12 @@ const HeroSection = () => {
                     animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.95 }}
                     transition={{ duration: 1, ease: "easeInOut" }}
-                    className="absolute inset-0"
+                    className="relative w-full min-h-screen flex items-center"
                 >
                     {/* Content Container - No Background here to let Global BG show */}
-                    <div className="relative h-full w-full px-6 sm:px-8 lg:px-16 xl:px-20 pt-20 pb-12">
-                        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 xl:gap-16 items-center h-full max-w-[1600px] mx-auto">
-                            <div className="space-y-6 max-w-4xl">
+                    <div className="relative w-full px-6 sm:px-8 lg:px-16 xl:px-20 pt-32 pb-24 lg:pt-20 lg:pb-12">
+                        <div className="flex flex-col lg:grid lg:grid-cols-[1.1fr_0.9fr] gap-12 xl:gap-16 items-center w-full max-w-[1600px] mx-auto">
+                            <div className="space-y-6 max-w-4xl w-full order-1 lg:order-none">
                                 <motion.div
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
@@ -107,7 +107,7 @@ const HeroSection = () => {
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ duration: 0.9, delay: 0.25, ease: [0.25, 0.1, 0.25, 1] }}
-                                    className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.08] text-slate-950 tracking-tight"
+                                    className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.08] text-slate-950 tracking-tight"
                                     style={{
                                         textShadow: '0 2px 20px rgba(255, 255, 255, 0.4), 0 1px 3px rgba(0, 0, 0, 0.1)'
                                     }}
@@ -209,9 +209,9 @@ const HeroSection = () => {
                                 animate={{ opacity: 1, x: 0, scale: 1 }}
                                 exit={{ opacity: 0, x: 30, scale: 0.95 }}
                                 transition={{ duration: 1, ease: [0.25, 0.1, 0.25, 1], delay: 0.3 }}
-                                className="relative h-full flex items-center justify-center"
+                                className="relative w-full flex items-center justify-center mt-8 lg:mt-0 order-2 lg:order-none"
                             >
-                                <div className="relative w-full max-w-lg xl:max-w-xl aspect-[4/5] max-h-[70vh]">
+                                <div className="relative w-full max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl aspect-[4/5] max-h-[60vh] lg:max-h-[70vh]">
                                     {/* Glow effect */}
                                     <div className="absolute -inset-8 bg-gradient-to-br from-[#ff9933]/20 via-[#2563eb]/20 to-[#138808]/20 rounded-[3rem] blur-3xl opacity-60" />
                                     
@@ -260,12 +260,12 @@ const HeroSection = () => {
             </AnimatePresence>
 
 
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2.5 bg-white/95 backdrop-blur-xl px-4 py-3 rounded-full shadow-lg shadow-slate-900/10 border border-slate-200/60">
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 bg-white/80 backdrop-blur-md px-5 py-3 rounded-full shadow-lg border border-white/50 z-20">
                 {slides.map((slide, idx) => (
                     <button
                         key={slide.id}
                         onClick={() => goToSlide(idx)}
-                        className={`w-3 h-3 rounded-full border border-white/40 transition pointer-events-auto ${currentSlide === idx ? 'bg-white shadow-lg shadow-white/30 scale-110' : 'bg-white/20'}`}
+                        className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${currentSlide === idx ? 'bg-blue-600 scale-125' : 'bg-slate-400 hover:bg-slate-600'}`}
                         aria-label={`Go to slide ${idx + 1}`}
                     />
                 ))}

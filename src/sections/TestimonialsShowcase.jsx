@@ -135,26 +135,26 @@ const MarqueeRow = ({ children, mouseX, direction = 1, isHovered }) => {
 }
 
 const TestimonialCard = ({ item }) => (
-    <div className="shrink-0 w-[420px] md:w-[520px] rounded-2xl border border-slate-200 bg-white p-5 md:p-6 shadow-lg">
-        <div className="flex items-start gap-4 md:gap-5">
-            <div className="w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 border-blue-100 bg-blue-50 flex-shrink-0">
+    <div className="shrink-0 w-[300px] sm:w-[420px] md:w-[520px] rounded-2xl border border-slate-200 bg-white p-4 sm:p-5 md:p-6 shadow-lg">
+        <div className="flex items-start gap-3 sm:gap-4 md:gap-5">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 border-blue-100 bg-blue-50 flex-shrink-0">
                 <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
             </div>
-            <div className="flex-1 space-y-3">
-                <div className="flex items-start justify-between gap-3">
+            <div className="flex-1 space-y-2 sm:space-y-3">
+                <div className="flex items-start justify-between gap-2 sm:gap-3">
                     <div>
-                        <div className="text-sm font-semibold text-blue-600 leading-tight">{item.role}</div>
-                        <div className="text-xl font-bold text-slate-900 leading-tight">{item.name}</div>
+                        <div className="text-xs sm:text-sm font-semibold text-blue-600 leading-tight">{item.role}</div>
+                        <div className="text-lg sm:text-xl font-bold text-slate-900 leading-tight">{item.name}</div>
                     </div>
                     <div className="flex items-center gap-1">
                         {Array.from({ length: 5 }).map((_, i) => (
-                            <svg key={i} className={`w-4 h-4 ${i < item.rating ? 'text-amber-400' : 'text-slate-300'}`} fill="currentColor" viewBox="0 0 20 20">
+                            <svg key={i} className={`w-3 h-3 sm:w-4 sm:h-4 ${i < item.rating ? 'text-amber-400' : 'text-slate-300'}`} fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
                             </svg>
                         ))}
                     </div>
                 </div>
-                <p className="text-slate-700 leading-relaxed">"{item.text}"</p>
+                <p className="text-sm sm:text-base text-slate-700 leading-relaxed">"{item.text}"</p>
             </div>
         </div>
     </div>
@@ -187,7 +187,7 @@ const TestimonialsShowcase = () => {
             
             <div className="relative w-full max-w-[1700px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-14 py-14 lg:py-16">
                 <div className="text-center space-y-3 max-w-4xl mx-auto">
-                    <h2 className="text-4xl md:text-5xl font-extrabold leading-tight drop-shadow-[0_10px_30px_rgba(6,182,212,0.25)] text-slate-900">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight drop-shadow-[0_10px_30px_rgba(6,182,212,0.25)] text-slate-900">
                         Trusted outcomes, real-world feedback
                     </h2>
                     <p className="text-base md:text-lg text-slate-700 leading-relaxed">

@@ -15,23 +15,34 @@ export const useSnapScroll = () => {
             const scrollPosition = window.scrollY
             const windowHeight = window.innerHeight
 
-            // Find which section is currently in view
+            // Find which section is currently in view with smoother detection
             sectionsRef.current.forEach((section, index) => {
                 const rect = section.getBoundingClientRect()
                 const sectionTop = rect.top + scrollPosition
                 const sectionHeight = rect.height
 
                 if (
-                    scrollPosition >= sectionTop - windowHeight / 2 &&
-                    scrollPosition < sectionTop + sectionHeight - windowHeight / 2
+                    scrollPosition >= sectionTop - windowHeight / 3 &&
+                    scrollPosition < sectionTop + sectionHeight - windowHeight / 3
                 ) {
                     setCurrentSection(index)
+                    
+                    // Add smooth transition classes
+                    sectionsRef.current.forEach((s, i) => {
+                        if (i === index) {
+                            s.classList.add('section-in')
+                            s.classList.remove('section-out')
+                        } else {
+                            s.classList.add('section-out')
+                            s.classList.remove('section-in')
+                        }
+                    })
                 }
             })
         }
 
-        const throttledScroll = throttle(handleScroll, 100)
-        window.addEventListener('scroll', throttledScroll)
+        const throttledScroll = throttle(handleScroll, 50)
+        window.addEventListener('scroll', throttledScroll, { passive: true })
 
         return () => {
             window.removeEventListener('scroll', throttledScroll)
@@ -50,11 +61,11 @@ export const useSnapScroll = () => {
                 block: 'start'
             })
 
-            // Reset scrolling flag after animation
+            // Reset scrolling flag after animation with longer duration for smoother feel
             setTimeout(() => {
                 isScrollingRef.current = false
                 setCurrentSection(index)
-            }, 1000)
+            }, 1200)
         }
     }
 

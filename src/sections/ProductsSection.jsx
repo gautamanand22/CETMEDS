@@ -1,212 +1,207 @@
-import React, { useRef } from 'react'
+import React, { useRef, useLayoutEffect } from 'react'
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { motion } from 'framer-motion'
+
+gsap.registerPlugin(ScrollTrigger)
+
+const products = [
+    {
+        id: 1,
+        title: "XYLONA",
+        category: "Eye Care",
+        subtitle: "In nasal congestion, make breathing easy",
+        description: "Clinically engineered eye drops for soothing hydration, clarity, and all-day protection. Preservative-free formula trusted by ophthalmologists worldwide.",
+        features: ["Gives relief within minutes & lasts upto 10 hrs1", "No rebound swelling recorded after 10 days of using Xylometazoline2", "Does not show signs of rebound swelling", "Provides fast & long-lasting relief"],
+        image: "/images/xylona.png",
+        gradient: "from-blue-50 via-cyan-50 to-teal-50",
+        color: "from-blue-500 to-cyan-500",
+        accentColor: "#3b82f6"
+    },
+    {
+        id: 2,
+        title: "Vital-O",
+        category: "Eye Care",
+        subtitle: "In Macular Degeneration & Diabetic Retinopathy",
+        description: "Vital-O offers the convenience of a small size soft gelatin capsule for Increased bio-availability Ease of Swallowing",
+        features: ["Lutein (3.2 mg.)", "Zeaxanthin (256 mcg)", "L-glutathione (5 mg)", "Beta-carotene (6000 I.U.)", "Zinc, Copper, Maganese & Selenium"],
+        image: "/images/olpat.png",
+        gradient: "from-purple-50 via-pink-50 to-rose-50",
+        color: "from-purple-500 to-pink-500",
+        accentColor: "#a855f7"
+    },
+    {
+        id: 3,
+        title: "ROTOWAX",
+        category: "Ear Care",
+        subtitle: "To remove hard impacted wax",
+        description: "(Paradichlorobenze,Benzocain, Chlorbutol&T urpentineOil)EarDrop. The impacted wax softener to remove excessimpacted wax",
+        features: ["Benzocaine- For local pain relief", "Tuprentine Oil - For lubrication", "Paradichlorobenzene - For softening &dispering impactedwax", "Chlorbutol - For anti-bacterial &Anti-fungalactivity"],
+        image: "/images/rotowax.png",
+        gradient: "from-emerald-50 via-green-50 to-lime-50",
+        color: "from-emerald-500 to-green-500",
+        accentColor: "#10b981"
+    },
+    {
+        id: 4,
+        title: "OFF TEAR",
+        category: "Eye Care",
+        subtitle: "To retain & provide the required lubrication. The better way to wet eyes dry",
+        description: "The better way to wet eyes dry",
+        features: ["Carboxymethylcellulose in OFF TEAR. Mimicsthe mucinlayer in natural tears1", "Providesbetter lubrication, protection & clinical efficacyfor longer period unlike other polymers2", "Provides better lubrication, protection & clinical efficacy for longer period unlike other polymers2", "In dryness associated with Contact lens wear Old age CVS Post LASIK"],
+        image: "/images/offtearplus.png",
+        gradient: "from-orange-50 via-amber-50 to-yellow-50",
+        color: "from-orange-500 to-amber-500",
+        accentColor: "#f97316"
+    }
+]
+
+const ProductCard = ({ product }) => {
+    return (
+        <div className="w-full h-full">
+            <div 
+                className="w-full h-full relative bg-white"
+            >
+                {/* Tricolor Gradient Background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#ff9933]/10 via-white to-[#138808]/10" />
+                
+                <div className="grid lg:grid-cols-2 gap-8 p-6 lg:p-12 items-center h-full max-w-[1920px] mx-auto relative z-10">
+                    <div className="space-y-6 relative order-2 lg:order-1">
+                        <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm border border-slate-200 rounded-full shadow-lg">
+                            <div className="w-2 h-2 rounded-full" style={{ background: product.accentColor }} />
+                            <span className="text-xs font-bold text-slate-900 uppercase tracking-wider">{product.category}</span>
+                        </div>
+
+                        <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 leading-tight tracking-tight">
+                            {product.title}
+                        </h3>
+
+                        <p className="text-lg md:text-xl font-bold bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] bg-clip-text text-transparent">
+                            {product.subtitle}
+                        </p>
+
+                        <p className="text-base md:text-lg text-slate-700 leading-relaxed">
+                            {product.description}
+                        </p>
+
+                        <div className="grid grid-cols-2 gap-3 pt-4">
+                            {product.features.map((feature, idx) => (
+                                <div key={idx} className="flex items-center gap-2 text-sm text-slate-800">
+                                    <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0" style={{ background: `linear-gradient(135deg, ${product.accentColor}, #138808)` }}>
+                                        <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    <span className="font-semibold">{feature}</span>
+                                </div>
+                            ))}
+                        </div>
+
+                        <div className="flex flex-wrap gap-4 pt-6">
+                            <button
+                                onClick={() => {
+                                    if (window.location.hostname === 'cetmeds.com' || window.location.hostname.includes('github.io')) {
+                                        window.location.assign('/?/catalogue')
+                                    } else {
+                                        window.location.assign('/catalogue')
+                                    }
+                                }}
+                                className="px-8 py-3 bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] text-white font-bold text-sm rounded-full shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2"
+                            >
+                                <span>View Details</span>
+                                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2.5}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                </svg>
+                            </button>
+                            <button className="px-8 py-3 bg-white/90 backdrop-blur-xl border-2 border-slate-300 text-slate-900 font-bold text-sm rounded-full hover:bg-white hover:scale-105 transition-all duration-300 shadow-lg">
+                                Request Sample
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="relative h-full flex items-center justify-center order-1 lg:order-2">
+                        <div className="relative w-full aspect-square max-h-[300px] sm:max-h-[500px] mx-auto">
+                            <div className="absolute -inset-12 rounded-full blur-3xl opacity-30 animate-pulse" style={{ background: `linear-gradient(135deg, ${product.accentColor}, #138808)` }} />
+
+                            <div className="relative h-full bg-white/80 backdrop-blur-2xl border-2 border-white/60 rounded-3xl shadow-2xl p-8 overflow-hidden flex items-center justify-center">
+                                <div className="absolute top-0 right-0 w-32 h-32 rounded-full blur-3xl opacity-20" style={{ background: `linear-gradient(135deg, ${product.accentColor}, transparent)` }} />
+                                <div className="absolute bottom-0 left-0 w-24 h-24 rounded-full blur-2xl opacity-20" style={{ background: `linear-gradient(225deg, ${product.accentColor}, transparent)` }} />
+
+                                <img src={product.image} alt={product.title} className="relative w-full h-full object-contain drop-shadow-2xl" />
+
+                                <div className="absolute top-4 left-4 px-3 py-1.5 bg-white/95 backdrop-blur-sm rounded-full border border-white/40 shadow-lg">
+                                    <span className="text-xs font-bold bg-gradient-to-r from-[#ff9933] to-[#138808] bg-clip-text text-transparent">Premium Quality</span>
+                                </div>
+                                <div className="absolute bottom-4 right-4 px-3 py-1.5 bg-white/95 backdrop-blur-sm rounded-full border border-white/40 shadow-lg">
+                                    <span className="text-xs font-bold text-slate-900">FDA Approved</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
 
 const ProductsSection = () => {
-    const sectionRef = useRef(null)
+    const containerRef = useRef(null)
+    const cardsRef = useRef([])
 
-    const products = [
-        {
-            id: 1,
-            name: "OffTears Eye Drops",
-            category: "Eye Care",
-            description: "Premium preservative-free eye drops for instant dry eye relief and long-lasting comfort throughout the day",
-            features: ["Preservative-free formula", "Instant relief", "Safe for daily use", "Clinically tested"],
-            image: "/images/offtears.png",
-            bgColor: "from-blue-500 to-cyan-600",
-            accentColor: "blue",
-            dosage: "10ml",
-            certification: "FDA Approved"
-        },
-        {
-            id: 2,
-            name: "ClearVision Eye Drops",
-            category: "Eye Care",
-            description: "Advanced lubricating eye drops designed for contact lens wearers and digital eye strain relief",
-            features: ["Contact lens compatible", "Blue light protection", "Extended moisture", "Non-irritating"],
-            image: "/images/offtears.png",
-            bgColor: "from-indigo-500 to-purple-600",
-            accentColor: "indigo",
-            dosage: "15ml",
-            certification: "Ophthalmologist Tested"
-        },
-        {
-            id: 3,
-            name: "AudiCare Ear Drops",
-            category: "Ear Care",
-            description: "Gentle and effective ear drops for wax removal, infection prevention, and maintaining optimal ear health",
-            features: ["Gentle formula", "Quick action", "Doctor recommended", "Anti-bacterial"],
-            image: "/images/offtears.png",
-            bgColor: "from-emerald-500 to-teal-600",
-            accentColor: "emerald",
-            dosage: "10ml",
-            certification: "ENT Approved"
-        }
-    ]
+    useLayoutEffect(() => {
+        const ctx = gsap.context(() => {
+            const mm = gsap.matchMedia();
+            
+            mm.add("(min-width: 1024px)", () => {
+                const cards = cardsRef.current
+                const totalScroll = (cards.length - 1) * 100 // Total scroll distance in percentage
+
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: "top top",
+                        end: `+=${totalScroll}%`,
+                        pin: true,
+                        scrub: 1,
+                    }
+                })
+
+                cards.forEach((card, index) => {
+                    if (index === 0) return
+                    
+                    tl.fromTo(card, 
+                        { yPercent: 100 },
+                        { yPercent: 0, ease: "none" }
+                    )
+                })
+            });
+        }, containerRef)
+
+        return () => ctx.revert()
+    }, [])
 
     return (
-        <section
-            id="products"
-            ref={sectionRef}
-            className="py-32 bg-white relative overflow-hidden"
-        >
-            {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-5">
-                <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-20 right-10 w-72 h-72 bg-indigo-400 rounded-full blur-3xl"></div>
+        <section id="products" className="relative bg-transparent">
+            <div className="relative z-10 pt-10 pb-4 text-center">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-950 leading-tight tracking-tight">
+                    Featured <span className="bg-gradient-to-r from-[#ff9933] via-[#2563eb] to-[#138808] bg-clip-text text-transparent">Products</span>
+                </h2>
+                <p className="mt-4 text-lg text-slate-600 max-w-2xl mx-auto px-4">
+                    Discover our range of clinically proven healthcare solutions
+                </p>
             </div>
 
-            <div className="container-custom relative z-10">
-                {/* Section Header */}
-                <div className="text-center mb-20">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-6">
-                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-                        </svg>
-                        Medical Product Range
+            <div ref={containerRef} className="lg:h-screen w-full relative lg:overflow-hidden flex flex-col lg:block">
+                {products.map((product, index) => (
+                    <div 
+                        key={product.id}
+                        ref={el => cardsRef.current[index] = el}
+                        className="relative lg:absolute top-0 left-0 w-full min-h-screen lg:h-full will-change-transform"
+                        style={{ zIndex: index + 1 }}
+                    >
+                        <ProductCard product={product} />
                     </div>
-                    <h2 className="heading-secondary mb-6">
-                        Our Medical Product Range
-                    </h2>
-                    <p className="text-body max-w-3xl mx-auto text-lg">
-                        Discover our comprehensive collection of FDA-approved medical solutions,
-                        each formulated with precision and backed by clinical research for optimal patient outcomes.
-                    </p>
-                </div>
-
-                {/* Products Grid */}
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16 max-w-7xl mx-auto">
-                    {products.map((product, index) => (
-                        <div
-                            key={product.id}
-                            className="group relative bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 border border-slate-100"
-                        >
-                            {/* Product Image Container with Gradient Background */}
-                            <div className={`relative h-80 bg-gradient-to-br ${product.bgColor} overflow-hidden`}>
-                                {/* Decorative Elements */}
-                                <div className="absolute inset-0">
-                                    <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
-                                    <div className="absolute bottom-0 left-0 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
-                                </div>
-
-                                {/* Certification Badge */}
-                                <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-semibold text-slate-700 shadow-lg">
-                                    {product.certification}
-                                </div>
-
-                                {/* Dosage Info */}
-                                <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-full text-xs font-semibold text-slate-700 shadow-lg">
-                                    {product.dosage}
-                                </div>
-
-                                {/* Product Image */}
-                                <div className="relative h-full flex items-center justify-center p-8">
-                                    <img
-                                        src={product.image}
-                                        alt={product.name}
-                                        className="w-full h-full object-contain transform group-hover:scale-110 transition-transform duration-500 drop-shadow-2xl"
-                                    />
-                                </div>
-
-                                {/* Animated Shine Effect */}
-                                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-                            </div>
-
-                            {/* Product Details */}
-                            <div className="p-8">
-                                {/* Category Badge */}
-                                <div className="mb-4">
-                                    <span className={`inline-flex items-center gap-1.5 text-sm font-semibold text-${product.accentColor}-600 bg-${product.accentColor}-50 px-4 py-1.5 rounded-full`}>
-                                        <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                        </svg>
-                                        {product.category}
-                                    </span>
-                                </div>
-
-                                {/* Product Name */}
-                                <h3 className="text-2xl font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">
-                                    {product.name}
-                                </h3>
-
-                                {/* Description */}
-                                <p className="text-slate-600 mb-6 leading-relaxed text-sm">
-                                    {product.description}
-                                </p>
-
-                                {/* Features List */}
-                                <ul className="space-y-2.5 mb-6">
-                                    {product.features.map((feature, idx) => (
-                                        <li key={idx} className="flex items-start text-sm text-slate-700">
-                                            <svg className="w-5 h-5 text-green-500 mr-2.5 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                                                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                                            </svg>
-                                            <span className="flex-1">{feature}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-
-                                {/* CTA Button */}
-                                <button className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 shadow-lg hover:shadow-xl group">
-                                    <span>View Details</span>
-                                    <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                {/* View All Button */}
-                <div className="text-center mb-16">
-                    <button className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-semibold px-8 py-4 rounded-full transition-all duration-300 shadow-lg hover:shadow-2xl transform hover:-translate-y-1 group">
-                        <span className="text-lg">View All Products</span>
-                        <svg className="w-6 h-6 transition-transform group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                        </svg>
-                    </button>
-                </div>
-
-                {/* Call to Action */}
-                <div className="text-center">
-                    <div className="relative bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 rounded-3xl p-12 max-w-5xl mx-auto overflow-hidden shadow-2xl">
-                        {/* Decorative Elements */}
-                        <div className="absolute inset-0 opacity-10">
-                            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-400 rounded-full blur-3xl"></div>
-                            <div className="absolute bottom-0 left-0 w-64 h-64 bg-indigo-400 rounded-full blur-3xl"></div>
-                        </div>
-
-                        <div className="relative z-10">
-                            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm text-white rounded-full text-sm font-medium mb-6">
-                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
-                                </svg>
-                                Custom Solutions Available
-                            </div>
-
-                            <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                                Need a Custom Solution?
-                            </h3>
-                            <p className="text-slate-200 mb-8 text-lg max-w-2xl mx-auto leading-relaxed">
-                                Our team of medical experts can develop customized formulations
-                                tailored to your specific healthcare needs and requirements.
-                            </p>
-                            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                                <button className="inline-flex items-center justify-center gap-2 bg-white text-blue-900 font-semibold px-8 py-4 rounded-xl hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-                                    </svg>
-                                    Request Custom Solution
-                                </button>
-                                <button className="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white font-semibold px-8 py-4 rounded-xl hover:bg-white/20 transition-all duration-300">
-                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                    </svg>
-                                    Download Catalog
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                ))}
             </div>
         </section>
     )

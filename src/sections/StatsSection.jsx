@@ -49,13 +49,9 @@ const StatsSection = () => {
     return (
         <section
             ref={sectionRef}
-            className="py-32 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 relative overflow-hidden"
+            className="py-32 relative overflow-hidden bg-white"
         >
-            {/* Background Elements */}
-            <div className="absolute inset-0">
-                <div className="absolute top-1/3 left-1/4 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-indigo-400/10 rounded-full blur-3xl"></div>
-            </div>
+
 
             <div className="container-custom relative z-10">
                 {/* Section Header */}

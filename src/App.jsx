@@ -1,16 +1,18 @@
-import React, { useEffect, useCallback } from 'react'
+import React, { useEffect, useCallback, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import Lenis from 'lenis'
+import 'lenis/dist/lenis.css'
 import './index.css'
 
-// Sections - Lazy import for better performance
+// Sections
 import HeroSection from './sections/HeroSection'
-import StatsSection from './sections/StatsSection'
+import AboutSection from './sections/AboutSection'
 import ProductsSection from './sections/ProductsSection'
-import ParallaxSection from './sections/ParallaxSection'
-import BenefitsSection from './sections/BenefitsSection'
-import TestimonialsSection from './sections/TestimonialsSection'
+import DoctorsSection from './sections/DoctorsSection'
+import TestimonialsShowcase from './sections/TestimonialsShowcase'
 import ContactSection from './sections/ContactSection'
+import Footer from './components/Footer'
 
 // Components
 import NavBar from './components/NavBar'
@@ -20,68 +22,143 @@ import ScrollProgress from './components/ScrollProgress'
 gsap.registerPlugin(ScrollTrigger)
 
 const App = () => {
+  const lenisRef = useRef(null)
+  const bgRef = useRef(null)
 
-  const initializeGSAP = useCallback(() => {
-    // Ultra-lightweight GSAP configuration for maximum performance
-    gsap.config({
-      autoSleep: 10,
-      force3D: false, // Disable 3D transforms to reduce GPU load
-      nullTargetWarn: false,
-      units: { rotation: "deg" }
-    })
-
-    // Minimal ScrollTrigger configuration
-    ScrollTrigger.config({
-      autoRefreshEvents: "none", // Disable auto-refresh for performance
-      ignoreMobileResize: true
-    })
-
-    // DISABLE ALL SCROLL ANIMATIONS TO ELIMINATE LAG
-    // Only use simple fade-in on initial load, no scroll-based animations
-    const elements = document.querySelectorAll('.animate-on-scroll')
-
-    if (elements.length > 0) {
-      // Simple one-time fade in, no scroll triggers
-      gsap.fromTo(elements,
-        { opacity: 0 },
-        {
-          opacity: 1,
-          duration: 0.3,
-          stagger: 0.05,
-          ease: "none"
-        }
-      )
-    }
-
-  }, [])
-
+  // Initialize Lenis smooth scrolling
   useEffect(() => {
-    // Immediate initialization
-    initializeGSAP()
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    })
+
+    lenisRef.current = lenis
+
+    // Animation loop
+    function raf(time) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+    requestAnimationFrame(raf)
+
+    // Update ScrollTrigger on scroll
+    lenis.on('scroll', ScrollTrigger.update)
 
     return () => {
-      // Clean up all ScrollTrigger instances
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
-      ScrollTrigger.clearScrollMemory()
+      lenis.destroy()
     }
-  }, [initializeGSAP])
+  }, [])
+
+  // Background Parallax Animation
+  useEffect(() => {
+    if (bgRef.current) {
+      gsap.to(bgRef.current, {
+        yPercent: 20, // Move background down slightly as we scroll down
+        ease: "none",
+        scrollTrigger: {
+          trigger: document.body,
+          start: "top top",
+          end: "bottom bottom",
+          scrub: true
+        }
+      })
+    }
+  }, [])
+
+  // Initialize GSAP ScrollTrigger animations
+  useEffect(() => {
+    // GSAP configuration
+    gsap.config({
+      force3D: true,
+      nullTargetWarn: false,
+    })
+
+    ScrollTrigger.config({
+      ignoreMobileResize: true,
+    })
+
+    // Animate sections on scroll
+    const sections = gsap.utils.toArray('section')
+    
+    sections.forEach((section, index) => {
+      // Skip hero section from fade animation
+      if (index === 0) return
+
+      // Skip products section to avoid breaking sticky positioning
+      if (section.id === 'products') return
+
+      gsap.fromTo(
+        section,
+        {
+          opacity: 0,
+          y: 100,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 80%',
+            end: 'top 20%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      )
+    })
+
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill())
+    }
+  }, [])
 
   return (
-    <div className="relative bg-white">
-      {/* Lightweight Navigation */}
+    <div className="relative min-h-screen bg-slate-50">
+      {/* Fixed Global Background */}
+      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Tricolor Gradient Base */}
+        <div 
+          ref={bgRef}
+          className="absolute -inset-[20%] w-[140%] h-[140%] bg-gradient-to-br from-[#ff9933]/20 via-white to-[#138808]/20"
+        />
+        
+        {/* Optional: Texture/Noise for professional feel */}
+        <div className="absolute inset-0 opacity-[0.03]" style={{ 
+            backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 400 400\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.9\' numOctaves=\'4\' /%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\' /%3E%3C/svg%3E")',
+            backgroundSize: '200px 200px'
+        }} />
+        
+        {/* Grid Pattern */}
+        <div className="absolute inset-0 bg-[url('/images/grid.svg')] opacity-[0.05]" />
+      </div>
+
+      {/* Navigation */}
       <NavBar />
 
-      {/* Main Content - No scroll progress to reduce scroll events */}
-      {/* Main Content */}
-      <main className="relative">
+      {/* Scroll Progress */}
+      <ScrollProgress />
+
+      {/* Main Content - Continuous Smooth Scrolling */}
+      <main className="relative main-container z-10">
         <HeroSection />
-        <StatsSection />
+        <AboutSection />
         <ProductsSection />
-        <ParallaxSection />
-        <BenefitsSection />
-        <TestimonialsSection />
+        <DoctorsSection />
+        <TestimonialsShowcase />
         <ContactSection />
       </main>
+
+      <div className="relative z-10">
+        <Footer />
+      </div>
     </div>
   )
 }
